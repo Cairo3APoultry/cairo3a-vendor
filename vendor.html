@@ -2,211 +2,372 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>تسجيل مورد جديد</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#121C33">
+<title>تسجيل الموردين — Cairo 3A Poultry</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--brand:#C4151C;--brand-dark:#8E0F14;--brand-light:#FDEBEC;--border:#E6E8EC;--surface:#F5F6F8;--ink:#1A1D23;--gray:#6B7280}
-*{box-sizing:border-box}
-body{background:var(--surface);font-family:"Cairo",system-ui,sans-serif;color:var(--ink);margin:0;min-height:100vh;-webkit-font-smoothing:antialiased}
-.hero{position:relative;overflow:hidden;text-align:center;color:#fff;padding:46px 18px 84px;background:linear-gradient(140deg,var(--brand),var(--brand-dark))}
-.hero::before{content:"";position:absolute;inset:0;opacity:.13;background:radial-gradient(circle at 12% 18%,#fff 0,transparent 36%),radial-gradient(circle at 88% 78%,#fff 0,transparent 30%)}
-.hero::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:44px;background:var(--surface);border-radius:50% 50% 0 0/100% 100% 0 0}
-.hero-inner{position:relative;z-index:2}
-.logo-badge{width:108px;height:108px;border-radius:50%;background:#fff;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 16px 42px rgba(0,0,0,.3),0 0 0 6px rgba(255,255,255,.18)}
-.logo-badge img{width:78%;height:78%;object-fit:contain}
-.logo-fallback{width:108px;height:108px;border-radius:50%;background:#fff;color:var(--brand);display:inline-flex;align-items:center;justify-content:center;font-size:48px;box-shadow:0 16px 42px rgba(0,0,0,.3),0 0 0 6px rgba(255,255,255,.18)}
-.hero h1{font-size:24px;font-weight:800;margin:18px 0 5px}
-.hero .sub{font-size:13.5px;font-weight:500;opacity:.9;margin:0}
-.hero .tag{display:inline-block;margin-top:13px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);border-radius:99px;padding:5px 16px;font-size:12px;font-weight:600}
-.wrap{max-width:640px;margin:-50px auto 34px;padding:0 14px;position:relative;z-index:5}
-.card{background:#fff;border-radius:22px;border:1px solid var(--border);box-shadow:0 14px 44px rgba(20,25,40,.09);overflow:hidden}
-.card-pad{padding:28px 22px}
-.sec-title{font-size:13px;font-weight:800;color:var(--brand);margin:0 0 16px;display:flex;align-items:center;gap:8px}
-.sec-title::after{content:"";flex:1;height:1px;background:var(--border)}
-.sec-title small{color:var(--gray);font-weight:600}
-.field{margin-bottom:19px}
-.lbl{font-size:13px;font-weight:700;margin-bottom:7px;display:block}
-.lbl .req{color:var(--brand);margin-left:2px}
+/* هوية Cairo 3A: كحلي عميق + أحمر العلامة — واجهة الشركة أمام الموردين */
+:root{
+  --navy:#121C33;--navy2:#1B2A47;--navy3:#2A3D63;--red:#C4151C;--red2:#9E1016;--red-soft:#FCEDEE;
+  --bg:#EEF1F6;--card:#FFFFFF;--soft:#F6F8FB;--line:#E2E7EF;--line2:#D3DAE5;--ink:#141B2B;--ink2:#4A5568;--mute:#8A94A6;
+  --ok:#15803D;--ok-soft:#ECFDF3;--err:#C81E1E;--err-soft:#FEF2F2;--shadow:0 1px 2px rgba(18,28,51,.04),0 12px 32px -12px rgba(18,28,51,.18);
+  --font:'Cairo',system-ui,-apple-system,'Segoe UI',sans-serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0B1222;--card:#141E33;--soft:#1A2640;--line:#26334D;--line2:#33425F;--ink:#E9EEF6;--ink2:#B3BFD2;--mute:#7F8CA3;
+  --red-soft:rgba(196,21,28,.14);--ok-soft:rgba(21,128,61,.14);--err-soft:rgba(200,30,30,.12);--shadow:0 12px 32px -12px rgba(0,0,0,.6);color-scheme:dark}}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:86px}
+body{overflow-x:hidden;background:var(--bg);font-family:var(--font);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased;padding-bottom:calc(96px + env(safe-area-inset-bottom))}
+button,input,textarea{font-family:inherit}
+svg.logo{display:block;color:#fff}
+
+/* ── الواجهة العلوية ── */
+.hero{position:relative;overflow:hidden;color:#fff;background:linear-gradient(160deg,var(--navy) 0%,var(--navy2) 60%,#22345A 100%);padding:calc(26px + env(safe-area-inset-top)) 20px 92px}
+.hero::before{content:"";position:absolute;inset:0;opacity:.07;background-image:repeating-linear-gradient(135deg,#fff 0 1px,transparent 1px 22px)}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:4px;background:linear-gradient(90deg,transparent,var(--red) 20%,var(--red) 80%,transparent)}
+.hero .glow{position:absolute;width:520px;height:520px;border-radius:50%;left:-160px;top:-260px;background:radial-gradient(circle,rgba(196,21,28,.35),transparent 65%)}
+.hero-in{position:relative;max-width:720px;margin:0 auto;text-align:center}
+.hero .logo{width:min(240px,62vw);height:auto;margin:6px auto 26px}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;letter-spacing:.3px;color:#FFD0D2;background:rgba(196,21,28,.18);border:1px solid rgba(255,138,142,.35);border-radius:99px;padding:5px 14px;margin-bottom:14px}
+.hero h1{font-size:clamp(26px,6.4vw,38px);font-weight:900;line-height:1.3;letter-spacing:-.2px;text-wrap:balance}
+.hero p.lead{margin:10px auto 0;max-width:520px;font-size:15.5px;line-height:1.85;color:#C3CEE2;font-weight:500}
+.perks{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 18px;margin-top:22px}
+.perks span{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:700;color:#E2E8F3}
+.perks i{color:#FF8A8E;font-size:15px}
+
+/* ── شريط الخطوات ── */
+.steps{position:sticky;top:0;z-index:20;max-width:760px;margin:-56px auto 0;padding:0 14px}
+.steps-in{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:12px 12px 10px}
+.steps ol{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.steps li button{width:100%;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--mute);padding:2px}
+.steps .dot{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:800;border:2px solid var(--line2);background:var(--card);transition:.2s;font-family:'Inter',var(--font)}
+.steps .nm{font-size:11.5px;font-weight:700;line-height:1.3;text-align:center}
+.steps li.cur .dot{border-color:var(--red);color:var(--red)}
+.steps li.cur .nm{color:var(--ink)}
+.steps li.done .dot{background:var(--red);border-color:var(--red);color:#fff}
+.steps li.done .nm{color:var(--ink2)}
+.prog{height:4px;border-radius:4px;background:var(--soft);margin-top:10px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--red2),var(--red));border-radius:4px;transition:width .35s ease}
+
+/* ── الأقسام ── */
+.wrap{max-width:760px;margin:18px auto 0;padding:0 14px;display:flex;flex-direction:column;gap:16px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);overflow:hidden}
+.p-head{display:flex;align-items:center;gap:14px;padding:20px 22px 16px;border-bottom:1px solid var(--line)}
+.p-num{width:42px;height:42px;border-radius:13px;background:var(--navy2);color:#fff;display:grid;place-items:center;font-size:19px;flex-shrink:0;position:relative}
+.p-num b{position:absolute;bottom:-5px;left:-5px;width:19px;height:19px;border-radius:50%;background:var(--red);font-size:10.5px;display:grid;place-items:center;border:2px solid var(--card);font-family:'Inter',var(--font)}
+.p-head h2{font-size:17.5px;font-weight:800;line-height:1.35}
+.p-head p{font-size:13px;color:var(--mute);font-weight:600;margin-top:1px}
+.p-head .opt{margin-inline-start:auto;font-size:11.5px;font-weight:800;color:var(--ink2);background:var(--soft);border:1px solid var(--line);border-radius:99px;padding:3px 10px;white-space:nowrap}
+.p-body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:18px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:620px){.grid2{grid-template-columns:1fr}.p-head,.p-body{padding-left:16px;padding-right:16px}}
+
+/* ── الحقول ── */
+.field{display:flex;flex-direction:column;gap:7px}
+.lbl{font-size:13.5px;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:6px}
+.lbl .req{color:var(--red);font-size:15px;line-height:1}
+.lbl small{font-weight:600;color:var(--mute);font-size:12px}
 .inp{position:relative}
-.inp>i{position:absolute;top:14px;right:14px;color:var(--gray);font-size:16px;pointer-events:none}
-.form-control{border:1.5px solid var(--border);border-radius:12px;font-size:14px;padding:12px 14px;font-family:inherit;transition:.15s}
-.inp .form-control{padding-right:42px}
-.form-control:focus{border-color:var(--brand);box-shadow:0 0 0 3.5px rgba(196,21,28,.1);outline:none}
-.field.invalid .form-control,.field.invalid .tagbox{border-color:#dc2626;background:#fef4f4}
-.err-msg{color:#dc2626;font-size:12px;font-weight:600;margin-top:5px;display:none}
-.field.invalid .err-msg{display:block}
-.tagbox{display:flex;flex-wrap:wrap;gap:7px;border:1.5px solid var(--border);border-radius:12px;padding:8px;min-height:48px;align-items:center}
-.tagbox:focus-within{border-color:var(--brand);box-shadow:0 0 0 3.5px rgba(196,21,28,.1)}
-.tag{display:inline-flex;align-items:center;gap:6px;background:var(--brand);color:#fff;border-radius:99px;padding:5px 12px;font-size:13px;font-weight:600}
-.tag i{cursor:pointer;font-size:14px}
-#tagInput{border:none;outline:none;flex:1;min-width:120px;font-family:inherit;font-size:14px;padding:4px;background:transparent}
-.suggest{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
-.sug{border:1.5px solid var(--border);background:#fff;color:var(--gray);border-radius:99px;padding:5px 12px;font-size:12.5px;font-weight:600;cursor:pointer}
-.sug:hover{border-color:var(--brand);color:var(--brand)}
-.yn{display:flex;gap:10px}
-.yn-btn{flex:1;border:1.5px solid var(--border);background:#fff;color:var(--gray);border-radius:12px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:.13s}
-.yn-btn.on{background:var(--brand);border-color:var(--brand);color:#fff}
-.field.invalid .yn-btn{border-color:#dc2626}
-.docs{display:flex;flex-direction:column;gap:10px}
-.doc-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:11px 13px}
-.doc-name{font-size:13px;font-weight:700;flex:1;min-width:120px;display:flex;align-items:center;gap:7px}
-.doc-btn{background:#fff;border:1.5px solid var(--brand);color:var(--brand);border-radius:9px;padding:7px 14px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit}
-.doc-status{font-size:12px;width:100%}
-.doc-mode{display:flex;gap:8px;margin-bottom:12px}
-.mode-btn{flex:1;border:1.5px solid var(--border);background:#fff;color:var(--gray);border-radius:10px;padding:9px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit}
-.mode-btn.on{background:var(--brand);border-color:var(--brand);color:#fff}
-.loc-btn{width:100%;border:2px dashed var(--brand);background:var(--brand-light);color:var(--brand);border-radius:14px;padding:16px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:10px}
-.loc-btn.done{border-style:solid;border-color:#16a34a;background:#f0fdf4;color:#15803d}
-.loc-status{font-size:12.5px;font-weight:600;margin-top:8px;min-height:18px}
-.loc-map{height:185px;border-radius:12px;overflow:hidden;border:1px solid var(--border);margin-top:11px;display:none}
-.manual{display:none;margin-top:12px}
-.submit-btn{width:100%;background:linear-gradient(135deg,var(--brand),var(--brand-dark));color:#fff;border:none;border-radius:14px;padding:15px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:0 8px 22px rgba(196,21,28,.28)}
-.submit-btn:disabled{opacity:.6;cursor:not-allowed}
-.hp{position:absolute;left:-9999px;opacity:0;height:0;width:0}
-.footer{text-align:center;font-size:12px;color:var(--gray);padding:14px 0 28px}
-.thanks{display:none;text-align:center;padding:46px 24px}
-.thanks .ico{width:88px;height:88px;border-radius:50%;background:#f0fdf4;color:#16a34a;font-size:46px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 0 0 8px #dcfce7}
-.thanks h2{font-weight:800;font-size:21px;margin-bottom:8px}
-.thanks .ref{display:inline-block;background:var(--surface);border:1.5px dashed var(--border);border-radius:10px;padding:8px 20px;font-weight:800;letter-spacing:2px;color:var(--brand);margin-top:8px;font-size:17px}
-.contacts{margin-top:28px;text-align:right;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px}
-.contacts-title{font-size:13px;font-weight:800;color:var(--brand);margin-bottom:12px;display:flex;align-items:center;gap:7px}
-.contact-row{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--border)}
+.inp>i{position:absolute;top:50%;transform:translateY(-50%);right:15px;color:var(--mute);font-size:17px;pointer-events:none;transition:color .15s}
+.form-control{width:100%;height:52px;border:1.5px solid var(--line2);border-radius:14px;background:var(--soft);color:var(--ink);font-size:16px;font-weight:600;padding:0 16px;outline:none;transition:border-color .15s,box-shadow .15s,background .15s}
+.inp .form-control{padding-right:46px}
+textarea.form-control{height:auto;min-height:104px;padding:13px 16px;line-height:1.75;resize:vertical}
+.form-control::placeholder{color:var(--mute);font-weight:500}
+.form-control:focus{border-color:var(--red);background:var(--card);box-shadow:0 0 0 4px rgba(196,21,28,.11)}
+.inp:focus-within>i{color:var(--red)}
+[dir=ltr].form-control,.ltr{direction:ltr;text-align:right}
+.err-msg{display:none;color:var(--err);font-size:12.5px;font-weight:700;align-items:center;gap:5px}
+.field.invalid .err-msg{display:flex}
+.field.invalid .form-control,.field.invalid .tagbox{border-color:var(--err);background:var(--err-soft)}
+.field.invalid .yn-btn,.field.invalid .loc-btn{border-color:var(--err)}
+
+/* الأصناف */
+.tagbox{display:flex;flex-wrap:wrap;gap:8px;border:1.5px solid var(--line2);border-radius:14px;background:var(--soft);padding:9px;min-height:54px;align-items:center;cursor:text;transition:.15s}
+.tagbox:focus-within{border-color:var(--red);background:var(--card);box-shadow:0 0 0 4px rgba(196,21,28,.11)}
+.tag{display:inline-flex;align-items:center;gap:7px;background:var(--navy2);color:#fff;border-radius:10px;padding:6px 8px 6px 12px;font-size:13.5px;font-weight:700}
+.tag i{cursor:pointer;width:20px;height:20px;border-radius:6px;display:grid;place-items:center;background:rgba(255,255,255,.14);font-size:13px}
+#tagInput{border:none;outline:none;flex:1;min-width:130px;font-size:16px;font-weight:600;padding:6px;background:transparent;color:var(--ink)}
+.suggest{display:flex;flex-wrap:wrap;gap:7px}
+.sug-t{font-size:12px;font-weight:800;color:var(--mute);width:100%}
+.sug{border:1.5px dashed var(--line2);background:var(--card);color:var(--ink2);border-radius:10px;padding:6px 12px;font-size:13px;font-weight:700;cursor:pointer;transition:.15s}
+.sug:hover{border-color:var(--red);border-style:solid;color:var(--red)}
+.sug.used{opacity:.4;pointer-events:none}
+
+/* نعم / لا */
+.yn{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.yn-btn{display:flex;align-items:center;gap:12px;border:1.5px solid var(--line2);background:var(--soft);color:var(--ink);border-radius:14px;padding:14px;font-size:15px;font-weight:800;cursor:pointer;text-align:start;transition:.15s}
+.yn-btn i{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--card);border:1px solid var(--line);font-size:17px;color:var(--mute);flex-shrink:0}
+.yn-btn small{display:block;font-size:12px;font-weight:600;color:var(--mute)}
+.yn-btn.on{border-color:var(--red);background:var(--red-soft);box-shadow:0 0 0 3px rgba(196,21,28,.08)}
+.yn-btn.on i{background:var(--red);border-color:var(--red);color:#fff}
+
+/* المستندات */
+.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--soft);border:1px solid var(--line);border-radius:13px;padding:4px;gap:4px}
+.mode-btn{border:none;background:none;border-radius:10px;padding:10px;font-size:13.5px;font-weight:800;color:var(--ink2);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px}
+.mode-btn.on{background:var(--card);color:var(--ink);box-shadow:0 2px 8px rgba(18,28,51,.12)}
+.docs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:620px){.docs{grid-template-columns:1fr}}
+.doc-row{display:flex;align-items:center;gap:12px;border:1.5px solid var(--line);background:var(--soft);border-radius:14px;padding:12px;transition:.15s}
+.doc-row.ok{border-color:rgba(21,128,61,.45);background:var(--ok-soft)}
+.doc-ic{width:42px;height:42px;border-radius:12px;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;color:var(--navy3);font-size:19px;flex-shrink:0}
+.doc-row.ok .doc-ic{background:var(--ok);border-color:var(--ok);color:#fff}
+.doc-main{flex:1;min-width:0}
+.doc-name{font-size:14px;font-weight:800}
+.doc-status{display:block;font-size:12px;font-weight:700;color:var(--mute);margin-top:1px}
+.doc-status a{color:var(--ok);font-weight:800}
+.doc-btn{border:1.5px solid var(--navy2);background:var(--card);color:var(--navy2);border-radius:10px;padding:8px 14px;font-size:13px;font-weight:800;cursor:pointer;white-space:nowrap}
+@media (prefers-color-scheme:dark){.doc-btn{border-color:var(--line2);color:var(--ink)}.doc-ic{color:var(--ink2)}}
+.hint{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--ink2);font-weight:600;background:var(--soft);border:1px dashed var(--line2);border-radius:12px;padding:10px 12px;line-height:1.7}
+.hint i{color:var(--navy3);font-size:15px;margin-top:2px}
+
+/* الموقع */
+.loc-btn{width:100%;display:flex;align-items:center;gap:14px;border:1.5px dashed var(--line2);background:var(--soft);color:var(--ink);border-radius:16px;padding:16px;font-size:15.5px;font-weight:800;cursor:pointer;text-align:start;transition:.15s}
+.loc-btn .li{width:46px;height:46px;border-radius:14px;background:var(--red);color:#fff;display:grid;place-items:center;font-size:21px;flex-shrink:0;box-shadow:0 8px 18px -6px rgba(196,21,28,.6)}
+.loc-btn small{display:block;font-size:12.5px;font-weight:600;color:var(--mute)}
+.loc-btn.done{border-style:solid;border-color:rgba(21,128,61,.5);background:var(--ok-soft)}
+.loc-btn.done .li{background:var(--ok);box-shadow:none}
+.loc-status{font-size:13px;font-weight:700;min-height:18px}
+.loc-map{height:200px;border-radius:16px;overflow:hidden;border:1px solid var(--line);display:none}
+.loc-map iframe{width:100%;height:100%;border:0;display:block}
+.manual{display:none;flex-direction:column;gap:8px}
+.or{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:800;color:var(--mute)}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
+.row-btn{display:flex;gap:8px}
+.row-btn .form-control{flex:1}
+
+/* ── شريط الإرسال ── */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:12px 14px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent,var(--bg) 30%)}
+.bar-in{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 18px 40px -14px rgba(18,28,51,.35);padding:10px 10px 10px 14px}
+.bar-t{flex:1;min-width:0}
+.bar-t b{display:block;font-size:13.5px;font-weight:800}
+.bar-t small{font-size:12px;color:var(--mute);font-weight:700}
+.submit-btn{border:none;border-radius:13px;background:linear-gradient(135deg,var(--red),var(--red2));color:#fff;font-size:15.5px;font-weight:800;padding:14px 22px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:0 10px 22px -8px rgba(196,21,28,.7);white-space:nowrap;transition:transform .1s}
+.submit-btn:active{transform:scale(.98)}
+.submit-btn:disabled{opacity:.65;cursor:not-allowed}
+
+/* ── الشكر ── */
+.thanks{display:none;max-width:620px;margin:-56px auto 0;padding:0 14px;position:relative;z-index:5}
+.th-card{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:38px 22px 26px;text-align:center}
+.th-ico{width:92px;height:92px;border-radius:50%;margin:0 auto 18px;display:grid;place-items:center;font-size:46px;color:#fff;background:linear-gradient(135deg,#1F9D55,#15803D);box-shadow:0 0 0 10px var(--ok-soft),0 16px 30px -10px rgba(21,128,61,.55)}
+.th-card h2{font-size:23px;font-weight:900}
+.th-card p{font-size:14.5px;color:var(--ink2);font-weight:600;line-height:1.85;margin-top:6px}
+.ref-box{display:inline-flex;align-items:center;gap:10px;margin-top:18px;border:1.5px dashed var(--line2);border-radius:14px;background:var(--soft);padding:10px 12px 10px 18px}
+.ref-box small{font-size:12px;font-weight:800;color:var(--mute)}
+.ref{font-size:20px;font-weight:900;letter-spacing:2px;color:var(--red);font-family:'Inter',var(--font);direction:ltr}
+.ref-copy{border:none;width:36px;height:36px;border-radius:10px;background:var(--card);border:1px solid var(--line);color:var(--ink2);cursor:pointer}
+.contacts{margin-top:24px;text-align:start;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.contacts-title{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:800;padding:12px 16px;background:var(--soft);border-bottom:1px solid var(--line)}
+.contacts-title i{color:var(--red)}
+.contact-row{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line)}
 .contact-row:last-child{border-bottom:none}
-.c-ico{width:40px;height:40px;border-radius:50%;background:var(--brand-light);color:var(--brand);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.c-info{flex:1;text-align:right}.c-name{font-weight:700;font-size:14px}.c-phone{font-size:13px;color:var(--gray);direction:ltr;text-align:right}
-.c-actions{display:flex;gap:8px}.c-btn{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--border);color:var(--brand);text-decoration:none;font-size:16px}.c-btn.wa{color:#25D366}
-#toastBox{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:9999;width:92%;max-width:420px;display:flex;flex-direction:column;gap:8px}
-#preload{position:fixed;inset:0;background:var(--surface);display:flex;align-items:center;justify-content:center;z-index:99999;color:var(--brand);font-size:30px}
+.c-ico{width:42px;height:42px;border-radius:50%;background:var(--navy2);color:#fff;display:grid;place-items:center;font-size:17px;flex-shrink:0}
+.c-info{flex:1;min-width:0}.c-name{font-weight:800;font-size:14.5px}.c-phone{font-size:13px;color:var(--mute);font-weight:700;direction:ltr;text-align:right}
+.c-actions{display:flex;gap:8px}
+.c-btn{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--card);border:1px solid var(--line);color:var(--navy2);text-decoration:none;font-size:17px}
+@media (prefers-color-scheme:dark){.c-btn{color:var(--ink)}}
+.c-btn.wa{background:#16A34A;border-color:#16A34A;color:#fff}
+.again{margin-top:22px;border:1.5px solid var(--line2);background:none;color:var(--ink2);border-radius:12px;padding:10px 18px;font-size:13.5px;font-weight:800;cursor:pointer}
+
+.footer{max-width:760px;margin:26px auto 0;padding:0 14px;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--mute);font-size:12px;font-weight:700}
+.footer svg.logo{width:118px;color:var(--ink2);opacity:.85}
+
+.hp{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);opacity:0;pointer-events:none;border:0;padding:0}
+#toastBox{position:fixed;top:calc(14px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:9999;width:92%;max-width:420px;display:flex;flex-direction:column;gap:8px}
+.toast{background:var(--card);color:var(--ink);border:1px solid var(--line);border-inline-start:4px solid var(--c);padding:12px 16px;border-radius:12px;box-shadow:0 12px 30px -10px rgba(0,0,0,.35);font-size:14px;font-weight:700;display:flex;gap:10px;align-items:center;animation:tin .25s ease-out}
+.toast i{color:var(--c);font-size:17px}
+@keyframes tin{from{opacity:0;transform:translateY(-8px)}}
+#preload{position:fixed;inset:0;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;z-index:99999;transition:opacity .35s}
+#preload svg.logo{width:200px}
+#preload .sp{width:34px;height:34px;border:3px solid rgba(255,255,255,.18);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+:focus-visible{outline:3px solid rgba(196,21,28,.45);outline-offset:2px}
 </style>
 </head>
 <body>
-<div id="preload"><i class="bi bi-arrow-repeat" style="animation:spin 1s linear infinite"></i></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="c3a-logo" viewBox="510 1540 4890 1020"><path transform="translate(400 1440)" fill="#D7141F" fill-rule="evenodd" d="M140 1154 C150 1153 163 1147 188 1132 C195 1128 202 1124 204 1123 C206 1122 216 1116 227 1108 C238 1101 251 1093 256 1089 C262 1086 268 1082 270 1080 C272 1079 280 1073 287 1068 C322 1046 333 1038 338 1034 C342 1031 347 1028 350 1026 C353 1024 358 1021 361 1019 C369 1013 398 994 417 982 C426 976 434 970 436 968 C439 967 445 962 452 959 C458 955 470 947 479 941 C488 935 497 928 499 927 C501 926 511 920 522 912 C533 906 546 897 551 894 C556 890 569 882 578 876 C588 870 599 862 603 860 C607 858 617 851 625 846 C634 840 643 834 647 833 C651 831 655 829 656 828 C658 826 666 822 674 818 C697 806 702 803 700 798 C700 796 686 784 672 773 C660 763 632 734 628 725 C627 723 622 717 619 710 C600 682 584 639 580 609 C580 604 579 598 579 597 C577 591 573 555 573 538 C572 527 571 526 566 531 C554 545 551 548 546 555 C543 559 537 567 533 572 C529 578 518 593 510 606 C501 619 491 633 488 637 C484 642 477 652 472 659 C467 666 460 677 456 682 C452 688 444 699 438 707 C420 733 402 757 392 771 C384 782 366 807 359 817 C355 823 348 832 344 838 C340 843 334 851 331 855 C325 864 310 885 296 904 C291 911 282 924 277 932 C272 939 264 951 258 958 C253 964 246 974 243 980 C239 985 233 993 230 997 C222 1008 212 1020 200 1038 C194 1047 184 1062 178 1070 C172 1078 164 1090 160 1095 C157 1100 149 1111 143 1119 C132 1134 124 1146 123 1149 C122 1152 126 1156 130 1156 C132 1155 136 1154 140 1154 Z M897 1151 C898 1150 899 1148 898 1144 C898 1139 899 1131 904 1110 C905 1104 907 1096 908 1091 C908 1086 910 1080 912 1076 C913 1072 914 1067 915 1064 C916 1061 917 1056 919 1053 C920 1049 922 1044 923 1040 C930 1022 943 1000 959 979 C965 971 996 939 1004 933 C1006 931 1010 928 1012 926 C1014 925 1020 921 1026 918 C1031 914 1040 909 1044 906 C1050 903 1056 899 1059 898 C1062 897 1069 894 1074 891 C1089 884 1132 869 1138 869 C1139 869 1143 868 1146 868 C1149 867 1155 866 1159 866 C1164 866 1167 866 1170 864 C1174 862 1177 861 1212 859 C1223 858 1227 857 1228 854 C1229 853 1227 850 1226 850 C1224 850 1207 840 1201 835 C1198 833 1194 831 1192 830 C1188 830 1173 824 1168 821 C1156 813 1114 806 1100 809 C1098 810 1092 810 1086 811 C1068 813 1035 823 1017 832 C1014 834 1011 835 1010 835 C1009 835 992 844 976 853 C959 862 940 874 927 885 C922 888 916 893 914 895 C909 899 884 919 870 930 C865 934 857 941 852 945 C847 950 840 956 836 959 C832 962 820 973 808 982 C797 992 784 1004 779 1009 C774 1014 766 1021 761 1025 C756 1028 748 1036 743 1041 C738 1046 731 1052 728 1055 C720 1061 695 1084 687 1093 C679 1101 641 1138 635 1143 C630 1147 629 1150 631 1152 C633 1153 642 1154 764 1154 C895 1154 895 1154 897 1151 Z M1583 1151 C1585 1149 1585 1149 1580 1141 C1576 1136 1570 1128 1566 1123 C1562 1118 1556 1110 1554 1107 C1552 1103 1548 1097 1545 1093 C1531 1074 1517 1054 1509 1042 C1505 1035 1499 1028 1497 1026 C1495 1023 1491 1018 1488 1013 C1484 1009 1478 1000 1473 993 C1468 987 1461 977 1457 972 C1454 967 1448 960 1446 956 C1444 953 1437 945 1432 938 C1419 918 1404 897 1402 894 C1400 893 1395 885 1390 878 C1385 871 1379 862 1376 858 C1373 855 1367 847 1362 840 C1351 824 1341 810 1322 784 C1314 774 1305 761 1302 757 C1299 753 1290 740 1282 730 C1274 718 1265 706 1262 702 C1239 671 1236 666 1227 652 C1223 647 1218 639 1214 636 C1211 632 1206 624 1203 620 C1199 614 1195 609 1193 607 C1189 602 1170 575 1166 568 C1162 561 1159 559 1157 561 C1156 563 1156 563 1157 568 C1158 571 1159 576 1160 578 C1160 581 1161 586 1162 589 C1167 610 1167 688 1162 702 C1161 705 1158 720 1158 723 C1158 725 1164 730 1177 736 C1186 741 1193 745 1198 749 C1201 752 1208 757 1212 760 C1216 763 1221 767 1224 769 C1226 771 1230 774 1233 776 C1248 787 1286 825 1296 838 C1298 841 1304 848 1308 853 C1315 862 1320 868 1334 889 C1337 893 1343 902 1348 910 C1353 918 1358 926 1360 929 C1362 932 1364 934 1364 934 C1364 935 1365 937 1366 938 C1368 940 1368 942 1368 943 C1367 944 1365 944 1346 938 C1340 937 1332 934 1327 933 C1322 932 1315 930 1311 928 C1302 926 1292 924 1276 923 C1270 923 1262 921 1257 920 C1247 918 1208 919 1190 921 C1159 925 1151 926 1146 928 C1144 929 1140 930 1138 931 C1136 931 1132 932 1128 933 C1125 934 1117 936 1111 938 C1096 943 1068 954 1058 959 C1057 960 1052 962 1048 964 C1028 974 992 999 983 1008 C979 1012 970 1021 964 1028 C941 1051 931 1067 918 1100 C915 1107 912 1114 911 1115 C909 1118 911 1121 914 1120 C917 1120 925 1112 925 1110 C925 1107 934 1096 945 1084 C952 1077 962 1068 966 1063 C971 1058 976 1053 977 1052 C979 1052 983 1048 987 1045 C1001 1033 1009 1027 1020 1021 C1026 1017 1035 1012 1039 1010 C1043 1007 1048 1005 1049 1004 C1050 1004 1054 1002 1057 1001 C1060 1000 1066 997 1071 995 C1076 994 1081 992 1082 991 C1084 990 1098 985 1106 984 C1123 980 1128 979 1134 978 C1138 978 1144 977 1148 976 C1156 974 1190 972 1199 972 C1202 973 1207 972 1210 972 C1214 971 1215 971 1216 972 C1217 974 1217 974 1208 982 C1202 987 1197 992 1194 997 C1191 1001 1186 1009 1182 1014 C1166 1036 1140 1084 1134 1104 C1132 1109 1130 1116 1128 1120 C1126 1124 1123 1132 1121 1138 C1115 1156 1083 1154 1352 1153 C1576 1153 1582 1153 1583 1151 Z M749 643 C754 640 761 628 761 624 C761 623 762 619 763 615 C764 611 765 601 766 592 C769 553 773 530 784 496 C788 485 802 456 804 455 C807 453 809 454 815 461 C856 510 868 524 887 541 C906 559 941 586 954 591 C961 594 973 594 980 591 C989 586 999 575 1009 559 C1011 555 1015 550 1017 546 C1043 510 1046 507 1054 500 C1062 494 1077 488 1086 486 C1101 482 1100 480 1078 449 C1075 446 1070 440 1068 436 C1066 433 1063 430 1062 428 C1060 427 1058 423 1056 420 C1053 418 1047 409 1042 402 C1036 394 1024 378 1016 366 C1007 353 997 340 994 336 C991 331 987 326 985 323 C983 320 979 315 976 310 C972 306 965 296 960 288 C954 281 946 271 943 266 C938 258 916 226 910 218 C904 210 872 166 862 151 C853 138 852 137 850 137 C849 138 841 149 818 180 C816 182 809 191 803 200 C798 208 756 265 710 327 C665 389 628 440 627 441 C627 443 624 446 611 464 C602 477 600 481 602 486 C604 491 641 549 662 580 C683 610 717 641 734 644 C743 646 744 646 749 643 Z M1120 253 C1144 247 1163 231 1167 215 C1168 212 1169 208 1170 206 C1172 201 1172 199 1172 184 C1172 169 1172 168 1169 160 C1159 136 1150 126 1128 118 C1118 114 1118 114 1100 114 C1086 114 1082 114 1076 116 C1055 122 1038 136 1030 154 C1025 167 1024 169 1024 184 C1024 200 1024 200 1029 210 C1033 220 1034 222 1040 228 C1056 245 1070 252 1093 254 C1098 254 1103 255 1104 255 C1105 256 1108 256 1120 253 Z M1098 243 C1085 242 1075 239 1068 236 C1056 230 1042 215 1040 206 C1040 204 1039 200 1038 197 C1035 190 1035 170 1038 164 C1040 159 1050 144 1053 141 C1057 138 1075 127 1080 125 C1086 123 1107 122 1115 124 C1125 127 1141 138 1147 146 C1155 157 1159 168 1160 184 C1162 199 1155 215 1141 229 C1132 238 1130 239 1119 242 C1109 244 1108 244 1098 243 Z M1082 225 C1085 222 1086 219 1086 208 C1086 196 1086 196 1088 194 C1092 190 1099 190 1103 194 C1107 198 1114 211 1118 217 C1120 223 1121 224 1125 226 C1129 226 1133 224 1133 220 C1133 217 1127 206 1121 198 C1115 191 1115 188 1121 185 C1130 180 1132 176 1132 163 C1132 146 1130 144 1100 143 C1076 143 1077 142 1075 155 C1073 168 1075 222 1077 224 C1079 226 1080 226 1082 225 Z M1087 179 C1084 176 1084 158 1087 154 C1090 150 1112 152 1116 157 C1122 163 1119 174 1111 178 C1104 181 1089 181 1087 179 Z"/><path transform="translate(1920 1520)" fill="currentColor" fill-rule="evenodd" d="M2158 1020 C2160 1019 2164 1017 2166 1016 C2169 1014 2172 1012 2173 1012 C2178 1010 2193 988 2197 975 C2200 964 2207 949 2212 941 C2213 939 2214 936 2214 936 C2213 936 2214 934 2216 932 C2218 930 2219 928 2219 927 C2219 925 2222 917 2226 910 C2232 900 2236 890 2236 888 C2236 887 2237 886 2237 885 C2238 884 2239 882 2240 879 C2242 869 2244 864 2245 862 C2246 861 2247 859 2248 857 C2248 855 2251 848 2254 842 C2257 836 2259 831 2259 830 C2259 830 2260 828 2261 827 C2262 826 2263 824 2263 822 C2264 821 2266 818 2269 815 C2272 812 2274 811 2276 811 C2278 812 2279 811 2282 808 L2285 805 L2282 801 L2278 798 L2259 797 L2241 797 L2238 800 C2235 803 2235 807 2238 811 C2244 817 2245 824 2242 828 C2242 829 2240 833 2239 836 C2238 840 2235 848 2232 853 C2230 858 2228 862 2228 863 C2228 864 2227 866 2226 868 C2225 870 2224 872 2224 873 C2224 873 2222 878 2220 882 C2218 887 2216 891 2216 892 C2216 893 2215 894 2214 895 C2214 896 2213 898 2213 899 C2213 901 2207 913 2206 914 C2206 914 2205 915 2205 917 C2205 919 2202 924 2200 924 C2199 924 2198 920 2197 912 C2196 908 2195 903 2194 900 C2192 897 2191 894 2191 894 C2191 893 2190 891 2189 889 C2188 887 2187 884 2186 882 C2185 876 2183 869 2181 866 C2180 865 2179 863 2179 862 C2179 861 2178 859 2178 858 C2175 851 2171 841 2171 840 C2171 839 2170 837 2169 834 C2168 832 2167 827 2166 823 C2166 817 2166 816 2168 814 C2170 813 2172 812 2173 812 C2175 812 2181 806 2181 804 C2181 803 2180 801 2178 800 L2176 798 L2145 797 L2114 797 L2112 800 L2109 803 L2112 807 C2114 808 2118 811 2120 813 C2125 815 2125 816 2128 822 C2129 823 2130 826 2131 828 C2132 831 2134 835 2135 838 C2137 842 2139 846 2140 848 C2142 850 2144 854 2144 856 C2145 859 2146 862 2147 865 C2148 867 2149 869 2149 870 C2149 870 2150 873 2151 875 C2152 877 2153 879 2153 880 C2153 880 2154 883 2155 885 C2156 887 2157 889 2157 890 C2157 891 2158 893 2158 894 C2162 901 2165 910 2165 911 C2165 912 2166 915 2173 928 C2174 932 2176 938 2177 940 C2178 942 2179 946 2180 948 C2184 956 2185 963 2183 966 C2182 967 2182 969 2182 971 C2183 974 2182 975 2178 980 C2176 982 2174 986 2174 987 C2174 990 2167 998 2163 1000 C2160 1001 2159 1001 2156 999 C2153 998 2150 997 2149 997 C2147 997 2146 996 2144 994 C2141 990 2130 982 2128 982 C2124 982 2118 989 2116 995 C2113 1003 2114 1005 2121 1013 C2127 1019 2128 1019 2135 1020 C2139 1021 2144 1022 2145 1022 C2146 1022 2149 1022 2150 1022 C2152 1021 2155 1020 2158 1020 Z M1431 968 C1436 967 1441 966 1442 966 C1443 965 1445 964 1446 964 C1451 963 1463 955 1472 948 C1486 937 1495 923 1500 906 C1503 896 1504 869 1501 860 C1500 856 1499 851 1499 850 C1499 848 1498 844 1496 842 C1494 839 1492 835 1491 834 C1486 823 1469 807 1458 802 C1455 800 1452 798 1452 798 C1451 798 1449 797 1447 796 C1444 796 1442 795 1441 794 C1439 792 1409 791 1400 793 C1397 794 1392 795 1389 795 C1380 796 1368 803 1356 814 C1350 820 1341 830 1341 832 C1341 833 1340 835 1339 836 C1338 837 1336 842 1333 848 C1329 856 1329 857 1328 872 C1327 888 1328 901 1331 909 C1332 911 1333 914 1333 915 C1333 916 1334 919 1336 922 C1338 924 1340 928 1341 930 C1344 936 1358 950 1366 955 C1383 967 1403 971 1431 968 Z M1617 966 C1618 965 1620 964 1621 964 C1622 963 1625 962 1626 960 C1628 959 1630 958 1630 958 C1631 958 1633 957 1635 955 C1637 954 1640 952 1641 952 C1642 951 1643 950 1644 950 C1644 949 1646 949 1648 949 C1652 949 1652 949 1654 957 C1655 964 1656 965 1676 964 C1694 963 1694 963 1697 960 C1699 959 1700 957 1700 956 C1700 954 1695 949 1694 949 C1693 949 1691 947 1690 945 L1686 942 L1686 922 C1685 897 1685 809 1686 805 C1687 801 1686 800 1683 796 C1681 794 1680 794 1678 794 C1676 795 1657 798 1644 799 C1637 799 1635 800 1633 802 C1631 803 1630 805 1630 806 C1630 808 1634 811 1639 812 C1645 813 1649 816 1650 820 C1650 821 1651 824 1652 825 C1653 828 1654 903 1652 919 L1651 930 L1646 936 C1643 939 1641 941 1639 941 C1636 941 1630 944 1627 947 C1624 949 1611 951 1608 950 C1606 949 1603 949 1600 949 C1594 949 1588 945 1584 937 C1577 926 1576 910 1576 858 C1577 835 1577 813 1578 809 L1578 801 L1574 798 C1571 795 1570 794 1568 795 C1564 796 1548 798 1539 798 C1529 798 1524 799 1521 803 L1518 805 L1521 809 C1524 811 1525 812 1529 812 C1533 813 1535 814 1538 816 C1544 822 1544 818 1544 878 C1545 918 1545 933 1546 936 C1549 946 1558 957 1566 961 C1575 965 1578 966 1582 967 C1589 968 1615 967 1617 966 Z M1909 965 C1916 961 1930 950 1934 943 L1937 938 L1934 935 C1933 933 1931 932 1931 932 C1929 932 1924 937 1924 939 C1924 939 1924 940 1923 940 C1922 940 1919 942 1916 945 L1910 949 L1902 948 C1897 948 1891 948 1889 948 C1886 948 1885 948 1884 945 C1883 944 1882 942 1881 941 C1881 940 1879 937 1878 935 C1875 929 1875 927 1875 859 L1875 812 L1901 812 C1928 812 1928 811 1930 809 C1934 806 1934 805 1929 800 C1926 796 1925 796 1922 797 C1915 798 1877 798 1876 796 C1875 795 1874 745 1876 740 C1876 738 1872 732 1870 732 C1867 732 1862 739 1861 745 C1860 751 1859 752 1858 754 C1858 755 1856 758 1856 762 C1854 765 1853 769 1851 771 C1850 772 1847 776 1846 778 C1844 782 1834 791 1830 794 C1822 798 1820 799 1817 801 C1813 805 1813 806 1817 809 C1819 811 1820 812 1829 812 C1836 812 1840 812 1841 813 C1842 814 1842 821 1842 873 C1841 942 1841 940 1851 956 C1853 958 1863 963 1869 965 C1882 969 1902 968 1909 965 Z M1202 961 L1206 958 L1203 955 C1201 953 1199 952 1194 952 C1187 951 1179 948 1175 945 C1171 941 1170 935 1170 905 C1170 878 1170 870 1172 872 C1174 872 1230 873 1235 872 C1237 871 1242 871 1246 871 C1250 870 1254 870 1254 869 C1255 869 1257 868 1259 868 C1264 867 1273 863 1276 861 C1277 860 1279 859 1280 859 C1283 858 1300 842 1304 836 C1311 826 1313 816 1313 800 C1313 792 1311 782 1309 780 C1309 779 1308 777 1306 775 C1304 771 1290 756 1285 752 C1283 751 1280 750 1277 750 C1275 749 1272 748 1270 747 C1269 746 1267 745 1265 745 C1264 745 1261 744 1259 743 C1257 743 1250 741 1244 740 C1232 737 1231 737 1166 737 L1100 738 L1098 740 L1096 742 L1099 745 C1103 750 1112 754 1118 755 C1122 756 1122 755 1127 766 L1130 772 L1130 840 C1130 917 1129 937 1127 942 C1126 943 1125 945 1125 946 C1125 948 1123 950 1120 950 C1117 950 1110 955 1110 957 C1110 958 1111 960 1112 961 C1115 963 1115 963 1149 963 C1168 963 1187 964 1191 964 C1198 964 1199 964 1202 961 Z M2006 963 L2030 963 L2033 960 L2036 957 L2034 955 C2033 953 2031 952 2031 952 C2030 952 2027 950 2024 948 L2019 944 L2019 895 C2019 855 2019 845 2020 841 C2021 838 2022 834 2022 832 C2022 830 2023 829 2024 828 C2024 827 2026 825 2027 822 L2030 818 L2025 814 C2020 810 2020 809 2020 804 C2019 795 2012 791 2005 794 C2004 795 1999 796 1996 796 C1972 799 1970 799 1966 802 L1963 805 L1966 809 C1968 810 1971 812 1972 812 C1974 813 1975 814 1976 814 C1976 815 1978 816 1980 816 C1984 818 1985 820 1986 834 C1987 855 1987 928 1986 937 L1985 944 L1978 951 L1971 958 L1974 961 C1976 964 1977 964 1979 963 C1981 963 1993 963 2006 963 Z M1807 960 L1809 957 L1806 954 C1805 952 1803 951 1802 951 C1801 951 1799 950 1797 949 C1796 948 1794 947 1793 947 C1792 947 1790 946 1788 944 L1786 941 L1785 840 L1785 739 L1782 736 C1779 732 1772 732 1766 735 C1764 736 1759 736 1753 737 C1741 737 1732 740 1728 743 L1726 746 L1729 749 C1731 751 1733 752 1734 752 C1737 752 1745 756 1748 760 C1750 761 1751 764 1752 766 C1752 768 1752 807 1752 853 C1752 931 1752 937 1751 939 C1750 940 1749 942 1749 944 C1749 947 1748 947 1744 950 C1741 951 1738 952 1737 952 C1736 952 1734 953 1732 955 L1729 957 L1732 960 L1735 963 L1769 963 L1804 963 L1807 960 Z M1408 957 C1401 954 1393 950 1388 946 C1385 943 1382 941 1381 941 C1379 940 1368 920 1368 916 C1368 915 1367 912 1366 910 C1364 904 1362 874 1364 860 C1365 854 1366 847 1367 846 C1367 844 1368 842 1368 841 C1368 839 1369 837 1370 835 C1372 833 1373 831 1373 831 C1373 830 1374 828 1376 824 C1380 818 1392 808 1397 808 C1399 807 1403 806 1406 806 C1414 803 1422 804 1430 808 C1433 810 1436 812 1436 812 C1437 812 1441 815 1448 821 C1454 826 1462 840 1465 850 C1468 862 1469 903 1466 910 C1465 911 1464 914 1464 917 C1462 924 1455 938 1449 944 C1438 955 1420 961 1408 957 Z M1172 857 L1169 854 L1169 808 L1169 762 L1172 758 C1174 756 1176 754 1177 753 C1181 752 1231 753 1234 754 C1235 755 1237 756 1240 757 C1248 758 1261 769 1267 780 L1271 786 L1271 806 C1271 820 1271 825 1270 826 C1269 828 1268 830 1268 831 C1266 838 1252 851 1247 851 C1245 851 1243 852 1241 854 C1239 855 1236 856 1235 856 C1233 856 1231 857 1229 857 C1227 858 1220 859 1200 859 L1174 860 L1172 857 Z M2080 841 C2081 840 2082 840 2083 840 C2084 840 2087 838 2090 835 C2100 826 2100 814 2090 803 C2085 797 2084 797 2077 795 C2062 791 2048 794 2038 802 C2032 807 2032 809 2036 812 C2040 816 2040 816 2043 813 C2044 811 2045 811 2050 811 C2057 812 2060 814 2060 818 C2060 820 2061 822 2062 824 C2064 826 2065 828 2065 829 C2065 830 2068 833 2071 836 C2076 842 2079 843 2080 841 Z M351 584 C354 583 358 582 360 582 C362 581 367 580 370 579 C374 578 380 576 385 574 C394 572 399 570 402 568 C403 567 405 566 406 566 C407 565 411 563 414 561 C416 560 419 558 420 558 C420 558 423 556 426 554 C428 552 432 550 434 549 C446 541 482 498 486 488 C486 486 487 485 488 484 C488 483 489 481 490 480 C490 479 491 477 491 476 C493 474 497 461 497 459 C497 458 498 456 499 454 C500 452 501 448 502 446 C502 443 503 440 504 439 C504 437 505 434 505 430 C505 424 505 423 502 420 L498 417 L484 417 L470 418 L466 422 C462 425 462 426 462 431 C462 433 461 436 460 437 C460 438 459 440 459 441 C459 442 458 445 456 448 C450 459 447 466 447 467 C447 467 445 470 443 473 C441 476 439 478 439 479 C439 479 437 482 435 485 C433 487 431 490 430 492 C429 496 397 527 393 527 C393 527 391 528 390 530 C386 532 379 536 375 538 C357 546 352 547 326 547 C308 547 303 547 298 546 C295 544 291 543 289 543 C287 543 284 542 282 541 C280 540 278 539 277 539 C276 539 274 538 273 538 C272 537 269 535 268 535 C266 534 263 532 262 531 C260 530 257 528 255 528 C250 525 229 503 229 500 C229 499 228 498 228 497 C226 495 220 484 218 480 C217 479 216 476 215 474 C213 469 209 458 204 444 C203 442 202 437 202 432 C201 427 200 422 199 419 C196 410 194 397 193 380 C192 370 192 358 191 352 C190 345 190 337 191 330 C192 324 192 311 193 302 C194 286 195 279 199 264 C200 260 201 255 201 252 C202 248 203 245 204 244 C204 242 205 240 205 239 C205 237 206 234 207 232 C208 230 209 227 210 224 C214 210 220 196 225 189 C227 186 229 183 230 182 C233 172 263 145 272 145 C273 145 276 144 278 143 C280 142 282 141 283 141 C284 141 286 140 287 139 C291 136 333 135 345 138 C348 139 352 140 354 141 C357 142 359 143 360 143 C361 144 363 145 365 146 C367 146 369 147 371 148 C372 148 374 149 376 149 C377 149 378 150 379 151 C380 151 382 153 384 154 C390 156 415 182 422 194 C423 195 425 198 427 200 C428 203 430 205 430 206 C430 206 432 209 434 213 C437 216 439 221 440 222 C440 223 442 226 443 229 C445 232 446 235 447 238 C448 240 449 242 450 243 C450 244 451 246 451 247 C451 249 452 251 452 252 C456 258 459 270 459 274 C459 277 460 279 460 280 C461 280 462 283 462 285 C463 288 464 291 466 293 L469 296 L482 296 L494 296 L498 293 L501 290 L501 276 C501 268 500 259 500 255 C499 251 498 238 497 226 C496 215 496 203 495 199 C494 193 492 159 492 142 C492 137 491 129 490 124 C489 116 488 114 486 111 C483 108 483 108 472 108 L462 108 L459 112 C456 114 454 118 453 121 C451 128 446 139 444 139 C444 139 443 140 442 140 C441 142 439 142 435 142 C429 142 428 142 425 138 C423 136 421 135 419 135 C418 135 415 133 412 131 C406 126 401 123 390 118 C388 116 385 115 384 115 C384 115 382 114 380 113 C378 112 375 111 373 111 C370 110 368 109 367 108 C366 108 364 107 362 107 C361 107 359 106 357 106 C354 104 339 101 326 100 C315 99 280 99 273 100 C270 101 262 102 255 102 C248 103 242 104 240 105 C239 105 236 106 233 106 C230 107 226 108 224 109 C222 110 220 111 220 111 C219 111 217 112 214 113 C212 114 210 115 210 115 C209 115 207 116 204 117 C202 118 200 119 199 119 C199 119 196 120 192 122 C189 124 185 126 184 126 C178 128 148 151 135 163 C125 173 107 193 107 195 C107 195 105 197 103 200 C98 207 96 210 92 217 C89 224 88 226 85 230 C84 231 83 234 83 236 C82 239 81 241 81 242 C80 244 79 246 78 248 C78 250 77 252 76 254 C76 255 75 257 75 259 C74 261 73 264 73 266 C70 271 67 282 66 288 C66 292 65 296 64 299 C61 311 61 377 64 389 C65 392 66 396 67 400 C67 403 68 407 68 408 C69 409 70 413 70 416 C71 419 72 422 73 424 C73 425 74 428 75 430 C75 432 76 436 77 438 C78 439 79 441 79 442 C79 443 85 457 93 473 C99 484 117 507 133 521 C146 534 159 545 161 545 C161 545 165 548 170 551 C175 554 180 558 181 558 C183 559 184 559 185 560 C186 560 188 561 189 562 C190 562 192 563 193 564 C194 564 197 566 200 566 C202 567 208 569 212 570 C225 575 228 576 234 577 C237 578 240 579 242 579 C243 580 249 581 256 581 C262 582 268 582 270 583 C278 586 342 586 351 584 Z M2168 584 C2171 583 2177 582 2182 582 C2187 581 2191 580 2192 579 C2194 579 2197 578 2200 577 C2205 576 2225 570 2231 567 C2233 566 2235 565 2236 565 C2237 565 2240 564 2247 560 C2248 559 2251 558 2254 556 C2258 554 2262 552 2263 551 C2264 550 2266 549 2266 549 C2266 549 2271 546 2276 542 C2291 533 2321 504 2326 496 C2327 495 2330 491 2334 486 C2338 482 2341 478 2341 477 C2341 476 2342 475 2343 474 C2344 472 2346 469 2352 456 C2361 439 2361 438 2362 435 C2363 431 2367 421 2368 418 C2368 416 2370 411 2371 406 C2372 401 2374 392 2375 387 C2380 364 2378 299 2372 282 C2371 280 2370 276 2369 272 C2369 268 2368 265 2367 265 C2367 264 2366 262 2366 260 C2365 258 2364 255 2363 253 C2362 251 2361 248 2361 247 C2361 246 2360 245 2360 244 C2359 244 2358 242 2357 241 C2357 239 2356 237 2355 236 C2354 235 2354 233 2353 232 C2352 231 2351 228 2350 226 C2348 223 2346 220 2346 218 C2345 217 2343 214 2341 212 C2340 209 2336 204 2332 199 C2325 188 2303 165 2288 153 C2273 141 2270 139 2268 139 C2267 139 2266 138 2266 138 C2265 137 2258 132 2254 130 C2253 130 2251 129 2250 128 C2249 128 2247 126 2246 126 C2245 125 2242 124 2240 122 C2234 119 2229 117 2220 115 C2218 114 2215 113 2214 112 C2212 112 2210 111 2209 111 C2207 111 2203 110 2200 109 C2196 108 2190 107 2186 106 C2183 106 2178 105 2177 104 C2176 104 2171 103 2167 102 C2163 101 2156 100 2152 100 C2148 99 2133 99 2120 99 C2098 99 2093 99 2086 101 C2081 102 2075 103 2072 103 C2066 103 2039 110 2032 113 C2031 114 2029 115 2028 115 C2027 115 2026 116 2025 116 C2024 117 2023 118 2023 118 C2022 118 2019 119 2006 125 C2000 128 1999 129 1991 134 C1988 136 1984 138 1982 138 C1980 139 1976 142 1972 144 C1968 147 1964 150 1962 151 C1958 154 1941 171 1939 175 C1938 176 1932 184 1926 190 C1920 198 1915 204 1915 204 C1915 205 1914 207 1913 208 C1911 209 1909 212 1908 214 C1907 217 1905 219 1904 220 C1904 221 1903 222 1903 223 C1903 224 1902 226 1901 226 C1900 228 1899 229 1899 230 C1899 231 1898 232 1898 234 C1896 236 1892 247 1890 253 C1889 255 1888 257 1888 258 C1887 258 1887 259 1887 260 C1887 262 1885 268 1881 280 C1880 286 1879 293 1878 300 C1878 307 1877 314 1876 316 C1874 322 1875 376 1876 381 C1877 384 1878 390 1878 395 C1879 402 1880 407 1882 413 C1884 418 1886 424 1886 427 C1887 430 1888 434 1889 436 C1890 438 1891 440 1891 441 C1891 442 1892 444 1893 446 C1894 447 1895 449 1895 450 C1895 451 1896 454 1898 457 C1900 460 1902 464 1902 465 C1905 473 1932 506 1948 521 C1959 532 1969 541 1970 541 C1971 541 1974 543 1976 545 C1980 547 1983 550 1984 550 C1986 551 1988 552 1990 554 C1993 555 1995 556 1996 556 C1997 557 2001 559 2006 561 C2020 568 2024 570 2030 572 C2033 572 2038 574 2040 575 C2043 576 2048 577 2051 577 C2054 578 2058 578 2060 579 C2061 580 2067 581 2074 582 C2080 582 2086 583 2087 583 C2092 586 2158 586 2168 584 Z M2738 584 C2740 584 2746 583 2750 582 C2754 581 2759 580 2762 580 C2764 579 2768 578 2771 578 C2774 577 2778 576 2780 575 C2783 574 2785 573 2786 573 C2787 573 2788 572 2789 572 C2790 571 2792 570 2794 570 C2796 569 2798 568 2799 568 C2800 567 2803 565 2807 564 C2814 562 2818 560 2828 552 C2843 540 2862 518 2866 509 C2867 508 2867 507 2868 506 C2870 503 2873 495 2874 492 C2874 489 2875 486 2876 485 C2879 478 2881 450 2878 436 C2876 426 2872 412 2868 406 C2867 405 2866 403 2866 402 C2861 391 2859 389 2851 380 C2833 363 2828 359 2814 353 C2810 351 2807 349 2807 348 C2806 348 2805 347 2803 346 C2802 346 2800 345 2799 344 C2798 344 2797 343 2796 343 C2795 343 2793 342 2791 341 C2789 340 2785 339 2782 338 C2779 337 2777 336 2776 336 C2776 336 2774 335 2771 335 C2767 334 2765 333 2763 332 C2762 330 2760 330 2754 330 C2750 330 2746 330 2746 329 C2746 327 2750 325 2756 323 C2759 322 2763 320 2765 320 C2766 319 2768 318 2769 318 C2770 318 2773 317 2776 316 C2778 314 2781 313 2782 313 C2783 313 2792 309 2798 306 C2814 299 2837 281 2841 273 C2844 268 2850 260 2853 257 C2855 255 2857 253 2857 252 C2857 251 2858 249 2859 247 C2866 232 2866 232 2866 210 C2866 188 2865 184 2858 170 C2856 165 2854 164 2846 153 C2838 143 2821 126 2818 126 C2816 125 2813 124 2811 122 C2808 121 2804 118 2802 117 C2799 116 2795 114 2793 113 C2791 112 2787 111 2785 111 C2782 110 2778 108 2774 107 C2769 104 2765 104 2756 102 C2750 102 2742 101 2739 100 C2731 99 2696 98 2691 99 C2688 100 2682 101 2677 102 C2672 102 2666 104 2664 104 C2663 105 2660 106 2657 106 C2629 112 2598 139 2590 164 C2588 170 2588 197 2590 206 C2591 215 2594 219 2601 228 C2609 238 2618 245 2624 245 C2624 245 2627 246 2629 247 C2635 251 2650 249 2663 242 C2672 238 2688 219 2690 212 C2690 210 2691 208 2692 206 C2694 203 2694 192 2693 188 C2689 173 2684 164 2672 154 C2666 149 2666 149 2660 149 C2652 150 2651 148 2658 140 C2662 136 2664 134 2667 134 C2669 133 2672 132 2674 131 C2678 129 2705 129 2710 131 C2712 132 2716 133 2718 134 C2720 134 2723 135 2724 136 C2725 136 2726 137 2728 137 C2733 137 2749 152 2754 164 C2756 167 2758 171 2758 172 C2758 172 2759 174 2760 176 C2762 180 2764 195 2764 207 C2764 214 2762 232 2761 237 C2760 240 2759 242 2759 243 C2759 244 2758 247 2757 249 C2756 252 2754 257 2752 260 C2750 264 2748 269 2746 271 C2745 273 2742 276 2741 278 C2737 284 2729 292 2725 295 C2722 296 2720 298 2718 299 C2714 302 2703 307 2702 307 C2701 307 2698 308 2695 309 C2692 310 2688 311 2687 311 C2685 311 2682 312 2681 312 C2680 313 2677 314 2675 314 C2672 314 2671 315 2668 318 C2664 321 2664 322 2664 332 L2663 342 L2667 346 C2670 350 2671 350 2675 350 C2678 350 2681 350 2683 351 C2685 352 2690 353 2694 354 C2699 354 2703 355 2703 356 C2704 356 2706 357 2708 357 C2710 357 2713 358 2715 359 C2717 360 2720 361 2720 361 C2721 361 2724 363 2727 364 C2730 366 2734 368 2735 369 C2738 370 2750 383 2755 389 C2760 396 2766 409 2767 414 C2767 416 2768 419 2768 420 C2769 421 2771 427 2772 433 C2775 446 2775 479 2773 488 C2772 491 2771 495 2771 497 C2771 499 2770 502 2769 504 C2768 506 2767 509 2767 511 C2766 512 2765 514 2764 515 C2764 516 2763 517 2763 517 C2763 519 2758 528 2756 532 C2755 534 2753 535 2752 535 C2751 535 2750 536 2749 536 C2747 538 2735 547 2733 547 C2733 547 2732 548 2731 548 C2730 549 2727 550 2723 550 C2719 551 2716 552 2714 553 C2710 557 2676 556 2671 553 C2670 552 2668 551 2667 551 C2666 551 2664 550 2662 549 C2660 546 2660 546 2661 544 C2662 543 2663 542 2663 540 C2663 539 2667 534 2672 528 C2677 522 2681 517 2681 516 C2681 516 2682 514 2683 512 C2688 503 2690 488 2688 482 C2687 479 2686 476 2685 474 C2685 472 2684 469 2683 468 C2682 467 2681 465 2681 464 C2681 463 2680 460 2678 458 C2674 453 2660 442 2658 442 C2657 442 2656 441 2655 440 C2653 439 2651 438 2636 439 C2619 439 2618 439 2616 441 C2614 442 2612 443 2612 443 C2607 443 2591 460 2586 469 C2586 470 2585 472 2584 473 C2582 477 2580 486 2580 495 C2580 505 2582 520 2585 522 C2585 523 2586 526 2587 528 C2588 535 2592 540 2602 551 C2608 556 2614 561 2616 562 C2618 562 2619 563 2619 564 C2620 564 2621 565 2622 565 C2623 565 2624 566 2626 567 C2626 568 2628 569 2628 569 C2629 569 2632 570 2634 572 C2637 573 2640 574 2642 574 C2643 574 2644 575 2646 575 C2647 576 2650 577 2652 578 C2655 578 2659 579 2660 580 C2661 580 2668 581 2674 582 C2680 583 2686 584 2687 584 C2689 585 2732 585 2738 584 Z M1786 579 C1788 578 1792 577 1793 577 C1794 577 1796 576 1797 576 C1798 575 1799 574 1799 574 C1806 574 1835 550 1838 543 C1838 542 1839 540 1840 539 C1840 538 1842 535 1844 532 C1845 529 1847 525 1848 524 C1848 522 1849 520 1849 519 C1849 518 1850 515 1851 513 C1852 511 1853 505 1854 500 C1855 496 1856 489 1856 486 C1857 480 1857 466 1856 459 C1856 456 1855 449 1854 444 C1853 434 1851 430 1846 425 C1843 423 1843 423 1835 423 C1827 424 1826 424 1823 428 L1819 432 L1819 440 C1820 445 1820 454 1821 460 C1822 474 1822 480 1818 483 C1816 485 1816 487 1815 492 C1815 498 1811 506 1806 511 C1800 517 1784 518 1777 513 C1776 512 1774 511 1772 510 C1771 510 1770 509 1770 508 C1769 506 1767 504 1766 502 C1764 499 1763 496 1762 491 C1759 468 1758 460 1756 442 C1752 416 1751 408 1746 398 C1745 395 1743 391 1742 389 C1742 387 1740 385 1740 384 C1739 383 1738 381 1738 380 C1736 376 1720 361 1711 355 C1701 348 1686 340 1680 339 C1679 338 1676 338 1674 337 C1673 337 1670 336 1667 335 C1662 333 1660 330 1664 330 C1666 330 1667 330 1667 329 C1668 329 1671 328 1675 326 C1679 326 1685 324 1688 323 C1691 322 1694 321 1696 321 C1698 321 1699 321 1700 320 C1700 320 1702 318 1705 318 C1707 317 1713 315 1717 313 C1721 311 1726 310 1728 309 C1730 309 1732 308 1732 307 C1733 307 1735 306 1736 306 C1739 305 1753 295 1757 291 C1758 290 1760 289 1760 289 C1762 289 1770 282 1777 274 C1785 265 1792 252 1794 247 C1794 245 1795 242 1796 241 C1798 238 1799 215 1798 205 C1797 193 1792 181 1786 171 C1779 161 1750 134 1745 134 C1745 134 1743 133 1741 132 C1740 132 1737 130 1736 130 C1735 129 1733 129 1732 128 C1730 127 1721 124 1715 122 C1712 122 1709 121 1709 120 C1708 120 1705 119 1702 118 C1699 118 1694 117 1692 116 C1690 116 1685 115 1682 114 C1680 114 1676 113 1675 112 C1669 110 1611 108 1482 108 L1357 108 L1354 112 C1350 115 1350 116 1350 122 C1350 129 1350 129 1354 133 L1358 138 L1371 139 C1378 139 1387 140 1390 141 C1395 142 1404 147 1407 150 C1410 153 1414 162 1415 166 C1416 169 1416 173 1417 176 C1418 178 1418 227 1418 341 C1418 516 1418 511 1413 518 C1412 520 1411 522 1411 522 C1411 524 1406 530 1403 531 C1402 531 1399 532 1398 533 C1394 536 1380 539 1371 539 C1362 539 1360 540 1355 544 C1352 547 1352 548 1352 555 C1352 562 1352 563 1355 566 L1358 569 L1477 569 L1595 569 L1599 566 C1602 563 1602 562 1602 556 C1602 551 1602 550 1598 546 C1592 541 1587 539 1572 539 C1561 538 1558 538 1554 536 C1546 532 1542 530 1541 527 C1541 526 1540 524 1540 523 C1538 522 1536 513 1534 505 C1532 497 1533 343 1535 342 C1537 340 1588 341 1591 343 C1592 343 1594 344 1596 344 C1599 344 1607 346 1609 348 C1610 348 1611 349 1612 349 C1612 349 1615 351 1618 353 C1624 357 1629 364 1630 368 C1631 370 1632 373 1633 374 C1634 376 1635 378 1635 380 C1635 381 1636 382 1636 383 C1637 384 1638 387 1638 390 C1639 392 1640 396 1640 398 C1641 401 1642 407 1643 414 C1644 420 1644 426 1645 428 C1646 431 1646 439 1646 446 C1647 467 1652 501 1656 512 C1657 513 1658 517 1658 520 C1660 528 1663 534 1665 537 C1666 538 1667 540 1667 541 C1667 541 1672 547 1678 553 C1686 562 1690 564 1696 567 C1700 569 1705 572 1706 573 C1713 576 1715 577 1719 578 C1722 578 1724 579 1725 579 C1727 581 1740 582 1760 582 C1778 581 1782 581 1786 579 Z M1058 566 C1061 563 1061 562 1061 555 C1061 548 1061 547 1057 544 C1054 540 1053 540 1044 539 C1040 538 1034 536 1031 535 C1022 531 1019 529 1019 528 C1019 527 1017 525 1015 522 C1009 516 1006 512 1006 509 C1005 507 1004 504 1003 503 C1002 502 1001 500 1001 499 C1001 499 1000 496 999 494 C998 492 997 490 997 489 C997 488 996 487 996 486 C995 485 994 484 994 482 C993 480 992 477 991 474 C990 472 989 470 989 469 C989 469 988 466 987 464 C986 462 985 460 985 458 C985 457 984 455 983 454 C982 452 981 450 981 449 C981 448 980 445 979 443 C978 441 977 439 977 438 C977 438 976 435 975 433 C974 431 973 429 973 428 C973 426 969 418 966 410 C964 406 962 402 962 400 C961 397 960 395 960 394 C959 393 958 391 957 390 C957 388 956 385 955 384 C952 378 949 370 949 368 C949 367 948 365 948 363 C946 359 942 352 942 349 C941 348 940 346 939 344 C939 343 938 342 938 341 C938 340 937 337 936 334 C934 332 933 329 933 328 C933 328 932 325 931 323 C930 321 929 319 929 318 C929 318 928 316 927 314 C926 311 925 309 925 308 C925 307 924 304 923 302 C922 300 921 298 921 297 C921 297 920 294 919 292 C918 290 917 288 917 287 C917 286 916 284 916 283 C915 282 914 281 914 280 C914 279 913 276 912 274 C910 271 909 268 909 267 C909 266 908 264 907 262 C906 259 905 257 905 256 C905 255 903 251 901 247 C899 242 897 238 897 237 C897 237 896 234 895 232 C894 230 893 228 893 227 C893 226 892 225 892 224 C891 223 890 221 890 219 C889 217 888 215 887 214 C887 213 886 211 885 209 C885 207 884 204 883 202 C882 200 881 198 881 198 C881 197 880 194 879 191 C877 185 876 183 872 174 C870 171 869 168 869 167 C869 166 868 164 868 163 C867 162 866 160 866 157 C865 155 864 153 864 152 C863 151 862 149 861 146 C860 144 860 142 859 142 C859 141 858 139 858 137 C857 135 856 133 856 132 C856 132 855 130 854 128 C852 121 848 114 845 111 L842 108 L802 108 L762 108 L756 113 C753 116 751 119 751 119 C751 120 750 123 748 126 C743 138 739 148 739 149 C739 150 737 155 733 164 C732 166 731 168 731 169 C731 170 730 172 729 173 C728 174 726 178 725 182 C723 186 721 190 720 192 C719 194 718 197 717 200 C716 202 714 206 713 208 C712 210 711 213 711 213 C711 214 707 224 704 228 C704 230 703 232 703 232 C703 233 702 235 701 237 C700 239 699 241 699 242 C699 242 698 245 696 247 C695 249 694 251 694 252 C694 253 693 254 693 255 C692 256 691 258 691 259 C690 261 689 263 688 264 C688 265 687 266 687 267 C687 269 681 284 680 286 C680 286 679 288 678 289 C678 292 671 307 668 311 C668 313 667 314 667 315 C667 316 666 318 665 319 C664 321 663 323 663 324 C663 324 662 328 660 331 C659 334 657 338 656 340 C652 349 651 352 650 355 C649 357 648 359 648 360 C647 360 647 361 647 362 C647 362 646 366 645 368 C643 371 642 374 642 375 C641 376 641 377 640 378 C640 379 638 382 637 386 C636 389 634 392 634 393 C633 394 632 396 631 398 C631 400 629 403 629 404 C628 405 627 408 627 410 C626 411 625 413 624 414 C624 415 623 416 623 417 C623 418 622 420 621 422 C620 424 619 426 619 426 C619 428 614 442 612 445 C611 446 610 448 609 451 C609 454 607 459 605 462 C604 466 602 470 601 472 C600 473 599 474 599 475 C599 476 598 479 597 481 C596 483 594 486 593 489 C586 507 576 522 568 527 C565 529 562 531 562 531 C561 531 560 532 559 532 C557 534 542 539 539 539 C538 539 535 541 532 544 L527 548 L527 555 C527 562 527 563 530 566 L533 569 L617 569 L701 569 L705 565 C708 562 709 561 709 557 C709 553 708 552 705 548 C701 544 700 544 691 543 C686 542 680 541 678 540 C676 540 671 539 667 539 C660 538 656 537 650 533 C649 533 646 532 645 531 C640 529 636 517 636 505 C636 498 638 487 640 485 C640 484 641 482 642 480 C642 474 646 464 648 462 C648 461 649 459 650 458 C650 456 651 455 652 454 C652 453 653 452 653 451 C653 450 654 447 655 445 C656 442 658 437 660 434 C663 424 667 416 668 415 C669 414 694 414 761 414 L853 414 L856 420 C858 423 859 427 859 428 C859 429 860 432 860 433 C861 435 862 438 863 439 C865 446 868 454 869 456 C870 458 871 460 871 461 C871 462 872 463 872 464 C873 465 874 467 874 469 C875 471 876 474 877 476 C878 478 879 480 879 482 C879 483 880 485 880 487 C884 493 886 513 884 520 C881 528 876 533 871 535 C868 535 865 536 864 537 C863 538 857 538 852 539 C839 540 836 541 830 546 C826 550 826 551 826 557 C826 562 826 563 830 566 L834 570 L944 569 L1054 569 L1058 566 Z M1314 566 C1317 563 1317 562 1317 556 C1317 549 1317 548 1314 545 C1309 540 1305 539 1297 539 C1275 539 1260 533 1257 525 C1257 524 1256 522 1255 520 C1250 514 1249 493 1249 319 C1250 190 1250 177 1251 175 C1252 174 1253 171 1253 167 C1254 164 1255 160 1255 159 C1256 158 1257 156 1258 155 C1258 152 1264 146 1265 146 C1266 146 1268 145 1270 144 C1273 142 1290 140 1300 140 C1307 140 1307 140 1310 136 C1314 132 1314 132 1314 123 C1314 115 1314 114 1311 111 L1308 108 L1292 108 C1279 108 1167 108 1100 108 L1082 108 L1077 112 L1073 116 L1073 124 C1074 132 1074 133 1077 136 C1080 138 1081 139 1087 139 C1099 140 1106 142 1110 143 C1115 146 1120 148 1122 148 C1124 148 1126 150 1130 158 C1136 171 1136 159 1136 340 L1136 506 L1133 511 C1132 514 1131 517 1131 518 C1131 519 1130 521 1129 522 C1128 523 1127 526 1126 528 C1125 529 1123 531 1122 532 C1110 537 1096 541 1086 541 C1081 541 1080 541 1077 544 C1074 547 1074 548 1074 555 C1074 562 1074 563 1077 566 L1081 569 L1184 569 C1316 570 1309 570 1314 566 Z M3320 569 L3421 569 L3426 565 C3430 560 3430 560 3430 555 C3430 550 3430 549 3426 546 C3421 541 3420 540 3412 539 C3408 538 3401 536 3396 534 C3387 530 3385 529 3382 525 C3376 518 3370 510 3370 507 C3369 506 3367 502 3366 498 C3364 494 3362 490 3361 488 C3360 485 3359 483 3358 482 C3358 480 3357 479 3357 478 C3357 476 3356 475 3356 474 C3355 473 3353 468 3351 463 C3349 458 3347 453 3346 452 C3346 450 3345 449 3345 448 C3345 447 3344 444 3343 442 C3340 436 3336 426 3336 425 C3336 424 3335 421 3333 418 C3332 415 3330 411 3330 409 C3329 407 3328 404 3327 402 C3323 395 3321 389 3321 387 C3321 386 3320 385 3320 384 C3319 383 3318 382 3318 381 C3318 379 3317 377 3316 375 C3315 373 3314 370 3314 368 C3313 366 3312 364 3312 363 C3311 362 3310 361 3310 360 C3310 358 3308 352 3302 340 C3300 336 3298 331 3297 330 C3297 328 3296 325 3295 323 C3294 321 3293 319 3293 318 C3293 318 3292 316 3291 314 C3290 312 3288 307 3287 302 C3286 298 3284 293 3283 292 C3282 291 3281 289 3281 289 C3281 287 3276 275 3274 272 C3274 271 3273 269 3273 268 C3273 267 3272 265 3272 264 C3271 262 3270 261 3270 260 C3270 259 3269 257 3268 255 C3267 253 3266 250 3266 248 C3265 246 3264 244 3264 243 C3263 242 3262 241 3262 239 C3261 237 3260 236 3260 235 C3259 234 3258 232 3257 230 C3257 227 3256 224 3255 224 C3255 223 3254 222 3254 221 C3254 220 3253 218 3252 216 C3251 214 3250 210 3250 209 C3249 207 3248 205 3248 203 C3247 202 3246 200 3246 198 C3245 196 3244 194 3244 193 C3243 192 3242 190 3241 189 C3241 187 3240 184 3239 183 C3238 182 3236 178 3235 174 C3233 168 3231 162 3227 154 C3227 153 3225 148 3224 144 C3222 140 3220 135 3219 132 C3218 130 3217 128 3217 127 C3217 126 3217 125 3216 124 C3216 124 3215 122 3214 120 C3213 117 3211 114 3210 112 L3207 109 L3168 109 L3129 109 L3124 114 C3121 116 3119 119 3119 120 C3119 120 3118 122 3117 124 C3116 126 3115 129 3114 131 C3114 133 3113 135 3112 136 C3112 137 3111 138 3111 140 C3111 141 3110 143 3109 144 C3108 146 3107 148 3107 148 C3107 150 3106 152 3105 153 C3104 155 3102 160 3100 165 C3099 170 3097 174 3097 175 C3095 178 3092 184 3089 192 C3087 196 3084 203 3082 206 C3076 219 3074 225 3074 226 C3074 227 3073 228 3073 230 C3070 236 3067 242 3067 244 C3067 245 3066 246 3065 247 C3064 248 3063 251 3062 253 C3062 255 3061 257 3061 258 C3060 258 3060 260 3059 262 C3058 264 3057 267 3056 268 C3056 270 3054 274 3053 277 C3052 280 3050 284 3049 286 C3047 290 3043 300 3040 306 C3040 307 3038 311 3037 314 C3036 317 3034 321 3033 323 C3032 325 3031 328 3031 328 C3031 329 3030 331 3029 332 C3028 334 3027 336 3027 337 C3027 338 3026 340 3025 341 C3024 343 3023 345 3023 346 C3023 347 3022 349 3021 351 C3020 353 3019 355 3019 355 C3019 356 3018 358 3017 360 C3016 363 3015 365 3015 366 C3015 366 3014 369 3012 371 C3011 374 3010 377 3010 378 C3010 378 3009 380 3009 382 C3006 386 3003 394 3003 396 C3003 397 3002 399 3000 400 C2999 401 2998 403 2998 404 C2998 405 2997 406 2996 408 C2996 409 2993 416 2990 422 C2988 428 2985 434 2985 435 C2984 436 2983 438 2983 440 C2982 441 2981 444 2980 446 C2977 453 2975 458 2974 463 C2973 466 2971 470 2970 472 C2968 474 2967 477 2966 478 C2966 479 2965 481 2965 482 C2964 484 2963 486 2963 487 C2962 490 2958 500 2956 502 C2956 503 2955 504 2954 506 C2954 507 2952 511 2949 515 C2947 518 2945 522 2945 522 C2945 523 2944 523 2944 523 C2943 523 2941 525 2938 527 C2935 529 2932 531 2932 531 C2931 531 2930 532 2929 532 C2928 533 2926 534 2924 534 C2922 535 2920 536 2919 536 C2919 536 2916 538 2912 538 C2909 539 2905 540 2904 541 C2903 542 2901 542 2900 542 C2899 542 2897 544 2895 546 C2891 549 2891 550 2891 556 C2891 562 2891 563 2894 566 L2897 569 L2982 569 L3067 569 L3071 565 C3075 562 3075 561 3075 556 C3075 552 3075 551 3071 547 C3066 543 3066 543 3058 543 C3054 542 3048 542 3044 541 C3040 540 3035 540 3031 539 C3028 538 3024 537 3023 537 C3022 536 3019 535 3018 535 C3014 534 3009 529 3009 527 C3009 527 3008 525 3007 523 C3005 520 3002 506 3004 502 C3004 500 3005 496 3006 493 C3006 490 3007 488 3008 487 C3008 486 3009 484 3009 483 C3009 481 3010 478 3010 477 C3011 475 3012 472 3013 469 C3014 467 3016 462 3018 459 C3019 456 3021 453 3021 452 C3021 451 3022 449 3023 446 C3024 444 3026 438 3027 435 C3029 431 3031 427 3032 425 C3032 424 3033 421 3034 420 C3035 418 3036 417 3041 416 C3046 414 3056 414 3133 414 L3219 414 L3221 416 C3222 418 3223 419 3223 420 C3224 421 3225 423 3226 424 C3226 425 3227 428 3227 429 C3227 431 3227 432 3228 432 C3228 433 3229 435 3230 437 C3231 440 3232 443 3232 444 C3238 455 3240 462 3242 469 C3243 471 3244 474 3244 476 C3248 482 3249 488 3251 496 C3254 511 3254 513 3252 519 C3251 522 3250 524 3250 525 C3250 527 3244 532 3238 536 C3234 538 3231 538 3224 539 C3219 539 3215 540 3214 540 C3213 541 3210 542 3207 542 C3202 543 3201 544 3197 548 C3192 552 3192 553 3192 558 C3192 562 3192 563 3195 566 C3200 570 3200 570 3210 570 C3215 569 3265 569 3320 569 Z M2118 553 C2113 553 2109 552 2108 551 C2106 551 2103 550 2099 550 C2096 549 2093 548 2092 547 C2091 547 2089 546 2087 545 C2085 545 2083 544 2082 544 C2081 543 2079 542 2077 542 C2076 541 2074 540 2073 539 C2072 539 2071 538 2070 538 C2069 538 2067 537 2066 536 C2064 535 2063 534 2062 534 C2058 534 2026 498 2026 493 C2026 493 2025 492 2024 491 C2024 490 2023 489 2023 488 C2023 487 2022 485 2021 484 C2020 483 2019 480 2019 478 C2018 477 2017 475 2016 474 C2016 473 2015 471 2014 470 C2014 468 2013 465 2012 464 C2011 463 2010 460 2010 459 C2010 457 2009 454 2008 452 C2007 450 2006 447 2006 446 C2006 444 2005 442 2004 440 C2004 439 2003 435 2002 430 C2002 426 2001 421 2000 420 C1999 418 1998 414 1998 405 C1998 397 1997 392 1996 390 C1994 386 1994 284 1996 279 C1997 277 1998 271 1998 265 C1999 260 2000 254 2000 253 C2001 252 2002 247 2002 243 C2002 239 2004 234 2004 233 C2005 232 2006 228 2006 226 C2007 223 2008 220 2008 219 C2009 218 2010 215 2010 213 C2011 211 2012 209 2013 208 C2013 207 2014 206 2014 204 C2014 203 2015 201 2016 200 C2017 198 2018 196 2018 195 C2019 193 2020 192 2020 191 C2021 191 2022 189 2022 188 C2023 186 2025 183 2026 182 C2027 180 2029 177 2029 176 C2031 172 2060 143 2062 143 C2063 143 2065 142 2067 140 C2068 139 2071 138 2072 138 C2074 138 2075 138 2076 137 C2077 135 2088 131 2095 130 C2100 130 2105 129 2107 128 C2112 127 2123 127 2131 128 C2135 129 2140 130 2144 130 C2147 130 2151 131 2154 132 C2156 132 2159 134 2162 134 C2164 134 2168 136 2170 138 C2173 140 2176 142 2177 142 C2179 142 2185 146 2195 155 C2204 163 2217 178 2217 180 C2217 180 2218 181 2219 182 C2220 183 2221 185 2222 186 C2224 192 2226 195 2227 197 C2229 200 2233 209 2234 211 C2234 213 2235 214 2236 215 C2236 216 2237 218 2238 220 C2238 223 2239 225 2240 226 C2240 227 2241 229 2242 232 C2242 234 2243 237 2244 239 C2244 240 2245 243 2246 246 C2246 248 2247 251 2248 252 C2248 253 2249 257 2250 261 C2250 264 2251 268 2252 270 C2252 271 2253 276 2253 281 C2254 287 2255 293 2256 295 C2257 298 2257 304 2257 345 C2257 376 2257 392 2256 394 C2255 395 2254 402 2254 410 C2254 417 2253 424 2252 425 C2251 426 2250 431 2250 435 C2249 439 2248 443 2248 444 C2247 445 2246 448 2246 450 C2245 453 2244 456 2244 457 C2243 458 2242 461 2242 462 C2242 464 2241 467 2240 468 C2239 470 2238 473 2238 475 C2237 476 2236 478 2235 479 C2235 480 2234 481 2234 482 C2234 484 2233 486 2232 487 C2231 489 2230 490 2230 491 C2230 492 2228 496 2225 500 C2222 503 2219 508 2218 509 C2217 510 2211 517 2205 524 C2195 534 2191 537 2186 539 C2183 541 2180 542 2179 542 C2179 542 2178 543 2177 543 C2176 544 2174 545 2172 546 C2170 546 2168 547 2166 548 C2165 548 2162 549 2159 550 C2157 550 2153 551 2152 552 C2149 553 2128 554 2118 553 Z M689 374 C686 372 685 370 685 367 C685 362 687 354 689 352 C689 351 690 349 690 348 C690 346 691 344 692 343 C693 341 694 338 695 336 C696 330 699 324 700 322 C701 321 702 319 702 318 C703 316 704 314 704 313 C705 312 706 310 706 308 C707 306 708 304 708 303 C709 302 710 301 710 300 C710 299 711 297 712 296 C713 294 714 291 714 289 C715 287 716 285 716 284 C717 283 718 281 718 278 C719 276 720 274 720 273 C721 272 722 270 722 268 C723 266 724 264 724 263 C725 262 726 260 726 259 C726 258 727 255 728 254 C729 253 730 250 730 248 C731 247 732 245 733 244 C733 243 734 242 734 241 C734 240 735 238 736 237 C737 235 738 233 738 232 C738 231 739 229 740 228 C741 226 742 223 742 222 C742 221 743 218 744 216 C745 214 746 211 746 209 C747 207 748 205 748 204 C749 203 750 202 750 202 C750 201 751 199 752 197 C753 195 754 192 754 191 C754 188 760 182 762 182 C762 182 764 181 764 180 C766 177 777 189 778 195 C778 197 779 199 780 200 C780 201 781 203 781 205 C782 207 783 209 783 210 C784 211 785 213 786 215 C786 217 787 220 788 221 C788 222 789 225 790 227 C790 229 791 232 792 232 C792 233 793 235 794 237 C794 239 795 241 796 242 C796 244 797 246 798 248 C798 250 799 253 800 255 C801 257 802 259 802 260 C802 261 803 262 804 263 C804 264 805 266 805 267 C805 268 806 271 807 272 C808 274 809 277 810 279 C810 281 811 283 812 284 C812 285 813 287 814 290 C814 292 815 294 816 295 C816 296 817 298 818 300 C818 302 819 304 819 306 C820 307 821 309 822 311 C822 313 823 315 824 316 C824 317 825 319 826 322 C826 324 827 326 828 327 C828 328 829 330 830 332 C830 334 831 336 832 337 C832 338 833 340 834 341 C834 343 835 345 836 346 C836 348 837 350 838 353 C838 355 839 358 840 358 C840 359 841 361 841 365 C841 370 841 371 838 374 L834 377 L764 377 L693 378 L689 374 Z M3058 374 C3053 370 3053 363 3056 356 C3057 354 3058 352 3058 352 C3058 351 3059 349 3060 347 C3061 345 3062 342 3062 342 C3062 341 3063 339 3064 338 C3065 336 3066 334 3066 333 C3066 331 3067 329 3068 328 C3069 326 3070 324 3070 324 C3070 322 3071 320 3072 319 C3073 317 3074 314 3074 312 C3075 311 3076 309 3076 308 C3077 307 3078 305 3078 303 C3079 301 3080 299 3080 298 C3080 298 3081 296 3082 294 C3083 291 3084 289 3084 288 C3085 287 3086 285 3086 283 C3087 281 3088 279 3089 278 C3089 277 3090 275 3090 274 C3090 272 3091 269 3092 268 C3093 266 3094 264 3094 263 C3094 262 3095 259 3096 256 C3097 254 3099 250 3100 247 C3101 244 3103 241 3104 239 C3105 237 3106 234 3106 234 C3106 233 3107 231 3108 229 C3109 227 3110 224 3110 222 C3111 220 3112 218 3113 217 C3113 216 3114 215 3114 214 C3114 212 3115 210 3116 209 C3117 208 3118 205 3119 203 C3119 202 3120 200 3121 199 C3121 198 3122 196 3122 194 C3124 189 3129 185 3134 185 C3139 185 3145 190 3146 196 C3146 198 3147 200 3148 201 C3148 202 3149 204 3150 207 C3150 209 3151 211 3152 212 C3152 213 3153 215 3154 217 C3154 219 3155 221 3156 222 C3156 224 3157 226 3158 228 C3158 230 3159 233 3160 235 C3161 237 3162 240 3162 241 C3162 242 3163 244 3164 246 C3165 248 3166 250 3166 252 C3166 253 3167 254 3168 255 C3168 256 3169 258 3170 260 C3170 262 3171 264 3172 265 C3172 266 3173 268 3174 271 C3174 273 3175 275 3176 276 C3176 277 3177 279 3178 282 C3178 284 3180 287 3180 288 C3181 289 3182 291 3182 292 C3182 294 3183 295 3183 296 C3184 298 3185 300 3185 302 C3186 303 3187 306 3188 309 C3189 311 3190 313 3190 314 C3190 315 3191 316 3191 318 C3192 319 3193 321 3194 323 C3194 325 3195 327 3196 328 C3197 329 3198 332 3198 334 C3198 337 3199 340 3200 340 C3200 341 3201 343 3202 345 C3202 347 3203 350 3204 350 C3204 351 3205 352 3205 353 C3205 354 3206 356 3208 358 C3211 363 3211 370 3207 374 L3203 377 L3132 377 L3061 378 L3058 374 Z M1531 312 L1527 308 L1527 243 C1527 171 1527 170 1533 157 C1536 152 1543 144 1549 140 C1552 138 1581 135 1590 136 C1592 137 1601 137 1608 138 C1620 138 1623 138 1625 140 C1626 141 1629 142 1632 142 C1634 143 1637 144 1638 144 C1639 145 1641 146 1642 146 C1650 149 1672 170 1677 180 C1683 193 1684 199 1685 222 C1685 238 1685 242 1684 245 C1683 247 1682 250 1682 253 C1681 257 1680 261 1676 267 C1676 268 1674 271 1674 273 C1671 278 1657 292 1649 297 C1640 303 1639 304 1635 306 C1634 306 1632 308 1631 308 C1630 309 1628 310 1625 310 C1622 310 1619 311 1618 312 C1615 314 1613 314 1607 314 C1603 314 1593 315 1586 316 C1578 316 1563 317 1553 317 L1535 317 L1531 312 Z"/></symbol></svg>
+<div id="preload"><svg class="logo" viewBox="0 0 4890 1020"><use href="#c3a-logo"/></svg><div class="sp"></div></div>
 <div id="toastBox"></div>
 
-<div class="hero"><div class="hero-inner">
-  <div id="logoBox"><div class="logo-fallback"><i class="bi bi-building"></i></div></div>
-  <h1>تسجيل مورد جديد</h1>
-  <p class="sub" id="groupName">Cairo 3A</p>
-  <span class="tag"><i class="bi bi-patch-check-fill me-1"></i>نموذج الموردين المعتمد</span>
+<header class="hero"><div class="glow"></div><div class="hero-in">
+  <svg class="logo" viewBox="0 0 4890 1020" role="img" aria-label="Cairo 3A Poultry"><use href="#c3a-logo"/></svg>
+  <div class="eyebrow"><i class="bi bi-patch-check-fill"></i>بوابة الموردين المعتمدة</div>
+  <h1 id="heroTitle">سجّل شركتك كمورد لـ Cairo 3A</h1>
+  <p class="lead" id="heroLead">املأ بيانات شركتك في ٤ خطوات بسيطة، وفريق المشتريات هيراجعها ويتواصل معاك.</p>
+  <div class="perks" id="perks">
+    <span><i class="bi bi-ui-checks"></i>٤ خطوات بسيطة</span>
+    <span><i class="bi bi-file-earmark-arrow-up"></i>رفع المستندات اختياري</span>
+    <span><i class="bi bi-headset"></i>تواصل مباشر مع المشتريات</span>
+  </div>
+  <p id="groupName" hidden></p>
+</div></header>
+
+<nav class="steps" id="stepsNav" aria-label="خطوات التسجيل"><div class="steps-in">
+  <ol>
+    <li data-s="1"><button type="button" onclick="goSec(1)"><span class="dot">1</span><span class="nm">بيانات الشركة</span></button></li>
+    <li data-s="2"><button type="button" onclick="goSec(2)"><span class="dot">2</span><span class="nm">النشاط والأصناف</span></button></li>
+    <li data-s="3"><button type="button" onclick="goSec(3)"><span class="dot">3</span><span class="nm">المستندات</span></button></li>
+    <li data-s="4"><button type="button" onclick="goSec(4)"><span class="dot">4</span><span class="nm">الموقع</span></button></li>
+  </ol>
+  <div class="prog"><i id="progBar"></i></div>
+</div></nav>
+
+<main class="wrap" id="formBox">
+  <input type="text" id="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+  <section class="panel" id="sec1">
+    <div class="p-head"><div class="p-num"><i class="bi bi-buildings"></i><b>1</b></div>
+      <div><h2>بيانات الشركة</h2><p>الاسم الرسمي ووسيلة التواصل مع المسؤول</p></div></div>
+    <div class="p-body">
+      <div class="field" id="f_vendor"><label class="lbl" for="fVendor">اسم الشركة / المورد<span class="req">*</span></label>
+        <div class="inp"><input id="fVendor" class="form-control" autocomplete="organization" placeholder="مثال: شركة النور للتوريدات"><i class="bi bi-building"></i></div>
+        <div class="err-msg"><i class="bi bi-exclamation-circle"></i>اسم الشركة مطلوب</div></div>
+      <div class="grid2">
+        <div class="field" id="f_contact"><label class="lbl" for="fContact">اسم المسؤول<span class="req">*</span></label>
+          <div class="inp"><input id="fContact" class="form-control" autocomplete="name" placeholder="الاسم الكامل"><i class="bi bi-person"></i></div>
+          <div class="err-msg"><i class="bi bi-exclamation-circle"></i>اسم المسؤول مطلوب</div></div>
+        <div class="field" id="f_mobile"><label class="lbl" for="fMobile">رقم التواصل<span class="req">*</span></label>
+          <div class="inp"><input id="fMobile" class="form-control ltr" type="tel" inputmode="tel" autocomplete="tel" placeholder="01000000000"><i class="bi bi-telephone"></i></div>
+          <div class="err-msg"><i class="bi bi-exclamation-circle"></i>أدخل رقم تواصل صحيح (٨ أرقام على الأقل)</div></div>
+      </div>
+      <div class="field" id="f_email"><label class="lbl" for="fEmail">البريد الإلكتروني <small>(اختياري)</small></label>
+        <div class="inp"><input id="fEmail" class="form-control ltr" type="email" inputmode="email" autocomplete="email" placeholder="example@company.com"><i class="bi bi-envelope"></i></div>
+        <div class="err-msg"><i class="bi bi-exclamation-circle"></i>صيغة البريد غير صحيحة</div></div>
+    </div>
+  </section>
+
+  <section class="panel" id="sec2">
+    <div class="p-head"><div class="p-num"><i class="bi bi-box-seam"></i><b>2</b></div>
+      <div><h2>النشاط والأصناف</h2><p>اللي بتورّده وطبيعة نشاطك</p></div></div>
+    <div class="p-body">
+      <div class="field" id="f_cats"><label class="lbl" for="tagInput">الأصناف اللي بتشتغل فيها<span class="req">*</span> <small>اكتب الصنف واضغط Enter</small></label>
+        <div class="tagbox" id="tagBox" onclick="document.getElementById('tagInput').focus()"><input id="tagInput" placeholder="اكتب صنف…" enterkeyhint="done"></div>
+        <div class="suggest" id="catSuggest"></div>
+        <div class="err-msg"><i class="bi bi-exclamation-circle"></i>أضف صنف واحد على الأقل</div></div>
+      <div class="field" id="f_notes"><label class="lbl" for="fNotes">تفاصيل النشاط / أصناف إضافية<span class="req">*</span></label>
+        <textarea id="fNotes" class="form-control" rows="3" placeholder="وصف النشاط بالتفصيل: الأصناف، الماركات، الكميات اللي تقدر توفرها…"></textarea>
+        <div class="err-msg"><i class="bi bi-exclamation-circle"></i>هذا الحقل مطلوب</div></div>
+      <div class="field" id="f_einv"><span class="lbl">هل لديك فاتورة إلكترونية؟<span class="req">*</span></span>
+        <div class="yn">
+          <button type="button" class="yn-btn" id="einvYes" onclick="setEinv('نعم')"><i class="bi bi-receipt-cutoff"></i><span>نعم<small>عندي فاتورة إلكترونية</small></span></button>
+          <button type="button" class="yn-btn" id="einvNo" onclick="setEinv('لا')"><i class="bi bi-x-lg"></i><span>لا<small>مش مسجّل حاليًا</small></span></button>
+        </div>
+        <div class="err-msg"><i class="bi bi-exclamation-circle"></i>من فضلك حدد</div></div>
+    </div>
+  </section>
+
+  <section class="panel" id="sec3">
+    <div class="p-head"><div class="p-num"><i class="bi bi-folder2-open"></i><b>3</b></div>
+      <div><h2>مستندات الشركة</h2><p id="docsHeadP">صورة أو PDF — حتى ٨ ميجا للملف</p></div><span class="opt">اختياري</span></div>
+    <div class="p-body">
+      <div class="hint" id="docsLocked"><i class="bi bi-info-circle"></i><span>اختار <b>«نعم»</b> في سؤال الفاتورة الإلكترونية علشان ترفع مستندات الشركة. لو مفيش، كمّل للخطوة اللي بعدها.</span></div>
+      <div id="docsSection" style="display:none;flex-direction:column;gap:14px">
+        <div class="seg">
+          <button type="button" class="mode-btn on" id="modeSep" onclick="setDocMode('sep')"><i class="bi bi-grid"></i>مستندات منفصلة</button>
+          <button type="button" class="mode-btn" id="modeAll" onclick="setDocMode('all')"><i class="bi bi-files"></i>ملف واحد شامل</button>
+        </div>
+        <div class="docs" id="docsSeparate">
+          <div class="doc-row" id="row_commercial"><div class="doc-ic"><i class="bi bi-journal-text"></i></div><div class="doc-main"><div class="doc-name">السجل التجاري</div><span class="doc-status" id="st_commercial">لم يُرفع بعد</span></div>
+            <input type="file" accept="image/*,application/pdf" id="file_commercial" hidden onchange="handleDoc('commercial',this)">
+            <button type="button" class="doc-btn" id="btn_commercial" onclick="document.getElementById('file_commercial').click()">رفع</button></div>
+          <div class="doc-row" id="row_tax"><div class="doc-ic"><i class="bi bi-credit-card-2-front"></i></div><div class="doc-main"><div class="doc-name">البطاقة الضريبية</div><span class="doc-status" id="st_tax">لم يُرفع بعد</span></div>
+            <input type="file" accept="image/*,application/pdf" id="file_tax" hidden onchange="handleDoc('tax',this)">
+            <button type="button" class="doc-btn" id="btn_tax" onclick="document.getElementById('file_tax').click()">رفع</button></div>
+          <div class="doc-row" id="row_adv"><div class="doc-ic"><i class="bi bi-cash-coin"></i></div><div class="doc-main"><div class="doc-name">شهادة الدفعات المقدمة</div><span class="doc-status" id="st_adv">لم يُرفع بعد</span></div>
+            <input type="file" accept="image/*,application/pdf" id="file_adv" hidden onchange="handleDoc('adv',this)">
+            <button type="button" class="doc-btn" id="btn_adv" onclick="document.getElementById('file_adv').click()">رفع</button></div>
+          <div class="doc-row" id="row_vat"><div class="doc-ic"><i class="bi bi-percent"></i></div><div class="doc-main"><div class="doc-name">شهادة القيمة المضافة</div><span class="doc-status" id="st_vat">لم يُرفع بعد</span></div>
+            <input type="file" accept="image/*,application/pdf" id="file_vat" hidden onchange="handleDoc('vat',this)">
+            <button type="button" class="doc-btn" id="btn_vat" onclick="document.getElementById('file_vat').click()">رفع</button></div>
+        </div>
+        <div class="docs" id="docsCombined" style="display:none;grid-template-columns:1fr">
+          <div class="doc-row" id="row_all"><div class="doc-ic"><i class="bi bi-files"></i></div><div class="doc-main"><div class="doc-name">كل المستندات معًا</div><span class="doc-status" id="st_all">تقدر تختار أكتر من ملف مرة واحدة</span></div>
+            <input type="file" accept="image/*,application/pdf" multiple id="file_all" hidden onchange="handleCombined(this)">
+            <button type="button" class="doc-btn" id="btn_all" onclick="document.getElementById('file_all').click()">اختر الملفات</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="sec4">
+    <div class="p-head"><div class="p-num"><i class="bi bi-geo-alt"></i><b>4</b></div>
+      <div><h2>موقع الشركة</h2><p>علشان نعرف أقرب مواقعنا ليك</p></div></div>
+    <div class="p-body">
+      <div class="field" id="f_loc">
+        <button type="button" class="loc-btn" id="locBtn" onclick="getLoc()"><span class="li"><i class="bi bi-crosshair"></i></span>
+          <span><span id="locLabel">مشاركة موقعي الحالي</span><small id="locSub">الأسرع — بضغطة واحدة من مكان الشركة</small></span></button>
+        <div class="loc-status" id="locStatus"></div>
+        <div class="manual" id="locManual">
+          <div class="or">أو</div>
+          <label class="lbl" for="fMapLink">الصق رابط موقعك من Google Maps</label>
+          <div class="row-btn"><input id="fMapLink" class="form-control ltr" placeholder="https://maps.app.goo.gl/…">
+            <button type="button" class="doc-btn" onclick="saveMapLink()">حفظ الرابط</button></div>
+          <div id="mapLinkStatus" class="loc-status"></div>
+        </div>
+        <div class="loc-map" id="locMap"></div>
+        <button type="button" class="or" id="manualToggle" style="background:none;border:none;cursor:pointer;color:var(--ink2)" onclick="showManual()">مش في مكان الشركة؟ الصق رابط الموقع بدلًا من ذلك</button>
+        <div class="err-msg"><i class="bi bi-exclamation-circle"></i>تحديد الموقع مطلوب (بالزرار أو بالرابط)</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<section class="thanks" id="thanksBox"><div class="th-card">
+  <div class="th-ico"><i class="bi bi-check-lg"></i></div>
+  <h2>تم استلام بياناتك بنجاح</h2>
+  <p>شكرًا لتسجيلك. فريق المشتريات هيراجع البيانات ويتواصل معاك قريب.</p>
+  <div class="ref-box"><small>الرقم المرجعي</small><span class="ref" id="refNo">—</span>
+    <button class="ref-copy" type="button" onclick="copyRef()" title="نسخ" aria-label="نسخ الرقم المرجعي"><i class="bi bi-clipboard"></i></button></div>
+  <div class="contacts" id="contactsBox" style="display:none"><div class="contacts-title"><i class="bi bi-headset"></i>للتواصل مع قسم المشتريات</div><div id="contactsList"></div></div>
+  <button class="again" type="button" onclick="location.reload()"><i class="bi bi-plus-lg"></i> تسجيل مورد آخر</button>
+</div></section>
+
+<footer class="footer"><svg class="logo" viewBox="0 0 4890 1020" aria-hidden="true"><use href="#c3a-logo"/></svg><span>© Cairo 3A Poultry — إدارة المشتريات</span></footer>
+
+<div class="bar" id="submitBar"><div class="bar-in">
+  <div class="bar-t"><b id="barT">ابدأ ببيانات الشركة</b><small id="barS">0 من 4 خطوات مكتملة</small></div>
+  <button class="submit-btn" id="submitBtn" onclick="submitForm()"><i class="bi bi-send-fill"></i>إرسال البيانات</button>
 </div></div>
-
-<div class="wrap"><div class="card">
-  <div class="card-pad" id="formBox">
-    <input type="text" id="website" class="hp" tabindex="-1" autocomplete="off">
-
-    <div class="sec-title"><i class="bi bi-info-circle-fill"></i>بيانات الشركة</div>
-    <div class="field" id="f_vendor"><label class="lbl">اسم الشركة / المورد<span class="req">*</span></label>
-      <div class="inp"><input id="fVendor" class="form-control" placeholder="مثال: شركة النور للتوريدات"><i class="bi bi-building"></i></div>
-      <div class="err-msg">اسم الشركة مطلوب</div></div>
-    <div class="field" id="f_contact"><label class="lbl">اسم المسؤول<span class="req">*</span></label>
-      <div class="inp"><input id="fContact" class="form-control" placeholder="الاسم الكامل"><i class="bi bi-person"></i></div>
-      <div class="err-msg">اسم المسؤول مطلوب</div></div>
-    <div class="field" id="f_mobile"><label class="lbl">رقم التواصل<span class="req">*</span></label>
-      <div class="inp"><input id="fMobile" class="form-control" type="tel" inputmode="tel" placeholder="01000000000"><i class="bi bi-telephone"></i></div>
-      <div class="err-msg">أدخل رقم تواصل صحيح (٨ أرقام على الأقل)</div></div>
-    <div class="field" id="f_email"><label class="lbl">البريد الإلكتروني <small class="text-muted fw-normal">(اختياري)</small></label>
-      <div class="inp"><input id="fEmail" class="form-control" type="email" inputmode="email" placeholder="example@company.com"><i class="bi bi-envelope"></i></div>
-      <div class="err-msg">صيغة البريد غير صحيحة</div></div>
-
-    <div class="sec-title" style="margin-top:24px"><i class="bi bi-box-seam-fill"></i>النشاط والأصناف</div>
-    <div class="field" id="f_cats"><label class="lbl">الأصناف اللي بتشتغل فيها<span class="req">*</span> <small class="text-muted fw-normal">(اكتب واضغط Enter)</small></label>
-      <div class="tagbox" id="tagBox" onclick="document.getElementById('tagInput').focus()"><input id="tagInput" placeholder="اكتب صنف..."></div>
-      <div class="suggest" id="catSuggest"></div>
-      <div class="err-msg">أضف صنف واحد على الأقل</div></div>
-    <div class="field" id="f_notes"><label class="lbl">تفاصيل النشاط / أصناف إضافية<span class="req">*</span></label>
-      <textarea id="fNotes" class="form-control" rows="3" placeholder="وصف النشاط بالتفصيل..."></textarea>
-      <div class="err-msg">هذا الحقل مطلوب</div></div>
-    <div class="field" id="f_einv"><label class="lbl">هل لديك فاتورة إلكترونية؟<span class="req">*</span></label>
-      <div class="yn"><button type="button" class="yn-btn" id="einvYes" onclick="setEinv('نعم')">نعم</button>
-        <button type="button" class="yn-btn" id="einvNo" onclick="setEinv('لا')">لا</button></div>
-      <div class="err-msg">من فضلك حدد</div></div>
-
-    <div id="docsSection" style="display:none">
-      <div class="sec-title" style="margin-top:24px"><i class="bi bi-folder2-open"></i>مستندات الشركة <small>(اختياري)</small></div>
-      <div class="doc-mode">
-        <button type="button" class="mode-btn on" id="modeSep" onclick="setDocMode('sep')">مستندات منفصلة</button>
-        <button type="button" class="mode-btn" id="modeAll" onclick="setDocMode('all')">ملف واحد شامل</button>
-      </div>
-      <div class="docs" id="docsSeparate">
-        <div class="doc-row"><div class="doc-name"><i class="bi bi-file-earmark-text"></i> السجل التجاري</div>
-          <input type="file" accept="image/*,application/pdf" id="file_commercial" style="display:none" onchange="handleDoc('commercial',this)">
-          <button type="button" class="doc-btn" id="btn_commercial" onclick="document.getElementById('file_commercial').click()">اختر ملف</button>
-          <span class="doc-status" id="st_commercial"></span></div>
-        <div class="doc-row"><div class="doc-name"><i class="bi bi-file-earmark-text"></i> البطاقة الضريبية</div>
-          <input type="file" accept="image/*,application/pdf" id="file_tax" style="display:none" onchange="handleDoc('tax',this)">
-          <button type="button" class="doc-btn" id="btn_tax" onclick="document.getElementById('file_tax').click()">اختر ملف</button>
-          <span class="doc-status" id="st_tax"></span></div>
-        <div class="doc-row"><div class="doc-name"><i class="bi bi-file-earmark-text"></i> شهادة الدفعات المقدمة</div>
-          <input type="file" accept="image/*,application/pdf" id="file_adv" style="display:none" onchange="handleDoc('adv',this)">
-          <button type="button" class="doc-btn" id="btn_adv" onclick="document.getElementById('file_adv').click()">اختر ملف</button>
-          <span class="doc-status" id="st_adv"></span></div>
-        <div class="doc-row"><div class="doc-name"><i class="bi bi-file-earmark-text"></i> شهادة القيمة المضافة</div>
-          <input type="file" accept="image/*,application/pdf" id="file_vat" style="display:none" onchange="handleDoc('vat',this)">
-          <button type="button" class="doc-btn" id="btn_vat" onclick="document.getElementById('file_vat').click()">اختر ملف</button>
-          <span class="doc-status" id="st_vat"></span></div>
-      </div>
-      <div class="docs" id="docsCombined" style="display:none">
-        <div class="doc-row"><div class="doc-name"><i class="bi bi-files"></i> كل المستندات معاً</div>
-          <input type="file" accept="image/*,application/pdf" multiple id="file_all" style="display:none" onchange="handleCombined(this)">
-          <button type="button" class="doc-btn" id="btn_all" onclick="document.getElementById('file_all').click()">اختر الملفات</button>
-          <span class="doc-status" id="st_all"></span></div>
-      </div>
-    </div>
-
-    <div class="sec-title" style="margin-top:24px"><i class="bi bi-geo-alt-fill"></i>الموقع</div>
-    <div class="field" id="f_loc">
-      <button type="button" class="loc-btn" id="locBtn" onclick="getLoc()"><i class="bi bi-crosshair"></i><span id="locLabel">مشاركة موقعي الحالي</span></button>
-      <div class="loc-status" id="locStatus"></div>
-      <div class="manual" id="locManual">
-        <label class="lbl" style="margin-top:4px">أو الصق رابط موقعك من Google Maps</label>
-        <div class="d-flex gap-2"><input id="fMapLink" class="form-control" placeholder="https://maps.google.com/...">
-          <button type="button" class="doc-btn" onclick="saveMapLink()" style="white-space:nowrap">حفظ الرابط</button></div>
-        <div id="mapLinkStatus" style="font-size:12px;margin-top:6px"></div>
-      </div>
-      <div class="loc-map" id="locMap"></div>
-      <div class="err-msg">تحديد الموقع مطلوب (بالزرار أو بالرابط)</div>
-    </div>
-
-    <button class="submit-btn mt-2" id="submitBtn" onclick="submitForm()"><i class="bi bi-send-fill me-1"></i>إرسال البيانات</button>
-  </div>
-
-  <div class="thanks" id="thanksBox">
-    <div class="ico"><i class="bi bi-check-lg"></i></div>
-    <h2>تم استلام بياناتك بنجاح</h2>
-    <p class="text-muted" style="font-size:14px">شكراً لتسجيلك. سيتم مراجعة البيانات والتواصل معك قريباً.</p>
-    <div style="font-size:13px;color:var(--gray)">رقم الطلب المرجعي</div>
-    <div class="ref" id="refNo">—</div>
-    <div class="contacts" id="contactsBox" style="display:none"><div class="contacts-title"><i class="bi bi-headset"></i>للتواصل مع قسم المشتريات</div><div id="contactsList"></div></div>
-    <div class="mt-4"><button class="btn btn-outline-secondary btn-sm" onclick="location.reload()"><i class="bi bi-plus-lg me-1"></i>تسجيل مورد آخر</button></div>
-  </div>
-</div><div class="footer"></div></div>
 
 <script>
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbwQZBm5NezyFsvst040mGALk0fNc2L251lcsV6BEs2l2c1Rr7XK-22qhoe__DDW8HoG/exec';
-  var LAT='',LNG='',MAPLINK='',EINV='',TAGS=[],DOCS={},DOCS_ALL=[],DOCMODE='sep',CONTACTS=[];
+var LAT='',LNG='',MAPLINK='',EINV='',TAGS=[],DOCS={},DOCS_ALL=[],DOCMODE='sep',CONTACTS=[];
 
 function escapeHtml(s){return String(s||'').replace(/[&<>"]/g,function(m){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m];});}
-function toast(msg,type){var c={success:'#16a34a',error:'#dc2626',warning:'#b45309',info:'#185FA5'}[type||'info'];var el=document.createElement('div');el.textContent=msg;el.style.cssText='background:#fff;border-right:4px solid '+c+';color:#1f2937;padding:12px 16px;border-radius:11px;box-shadow:0 6px 24px rgba(0,0,0,.16);font-size:13.5px;font-weight:600';document.getElementById('toastBox').appendChild(el);setTimeout(function(){el.style.transition='opacity .3s';el.style.opacity='0';setTimeout(function(){el.remove();},300);},3400);}
+function toast(msg,type){
+  var c={success:'#16a34a',error:'#dc2626',warning:'#d97706',info:'#2563eb'}[type||'info'];
+  var ic={success:'check-circle-fill',error:'x-circle-fill',warning:'exclamation-triangle-fill',info:'info-circle-fill'}[type||'info'];
+  var el=document.createElement('div'); el.className='toast'; el.style.setProperty('--c',c);
+  el.innerHTML='<i class="bi bi-'+ic+'"></i><span></span>'; el.querySelector('span').textContent=msg;
+  document.getElementById('toastBox').appendChild(el);
+  setTimeout(function(){el.style.transition='opacity .3s';el.style.opacity='0';setTimeout(function(){el.remove();},300);},3600);
+}
 function mark(id,on){var f=document.getElementById(id);if(!f)return;if(on)f.classList.add('invalid');else f.classList.remove('invalid');}
 function api(action,payload){return fetch(GAS_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:action,payload:payload||{}})}).then(function(r){return r.json();});}
+function hidePre(){var p=document.getElementById('preload');p.style.opacity='0';setTimeout(function(){p.style.display='none';},350);}
 
 api('init').then(function(d){
-  document.getElementById('preload').style.display='none';
-  if(d.branding&&d.branding.logo){var src=String(d.branding.logo).indexOf('data:')===0?d.branding.logo:'data:image/png;base64,'+d.branding.logo;document.getElementById('logoBox').innerHTML='<div class="logo-badge"><img src="'+src+'" alt="logo"></div>';}
-  if(d.branding&&d.branding.name)document.getElementById('groupName').textContent=d.branding.name;
+  hidePre();
   CONTACTS=d.contacts||[];
-  if(d.categories&&d.categories.length){var box=document.getElementById('catSuggest');d.categories.forEach(function(c){var s=document.createElement('span');s.className='sug';s.textContent='+ '+c;s.onclick=function(){addTag(c);};box.appendChild(s);});}
-}).catch(function(){document.getElementById('preload').style.display='none';toast('تعذّر تحميل البيانات — تأكد من الاتصال','error');});
+  if(d.categories&&d.categories.length){
+    var box=document.getElementById('catSuggest');
+    box.innerHTML='<span class="sug-t">اقتراحات سريعة</span>';
+    d.categories.forEach(function(c){var s=document.createElement('button');s.type='button';s.className='sug';s.textContent='+ '+c;s.dataset.v=c;s.onclick=function(){addTag(c);};box.appendChild(s);});
+  }
+}).catch(function(){hidePre();toast('تعذّر تحميل البيانات — تأكد من الاتصال','error');});
 
-['fVendor','fContact','fMobile','fEmail','fNotes'].forEach(function(id){document.getElementById(id).addEventListener('input',function(){mark('f_'+id.replace(/^f/,'').toLowerCase(),false);});});
+['fVendor','fContact','fMobile','fEmail','fNotes'].forEach(function(id){document.getElementById(id).addEventListener('input',function(){mark('f_'+id.replace(/^f/,'').toLowerCase(),false);progress();});});
 
-function addTag(t){t=String(t||'').trim().replace(/[،,]+$/,'');if(!t)return;if(TAGS.indexOf(t)>=0){document.getElementById('tagInput').value='';return;}TAGS.push(t);var chip=document.createElement('span');chip.className='tag';chip.innerHTML=escapeHtml(t)+' <i class="bi bi-x"></i>';chip.querySelector('i').onclick=function(){TAGS.splice(TAGS.indexOf(t),1);chip.remove();};document.getElementById('tagBox').insertBefore(chip,document.getElementById('tagInput'));document.getElementById('tagInput').value='';mark('f_cats',false);}
+function syncSug(){document.querySelectorAll('.sug').forEach(function(s){s.classList.toggle('used',TAGS.indexOf(s.dataset.v)>=0);});}
+function addTag(t){t=String(t||'').trim().replace(/[،,]+$/,'');if(!t)return;if(TAGS.indexOf(t)>=0){document.getElementById('tagInput').value='';return;}
+  TAGS.push(t);var chip=document.createElement('span');chip.className='tag';chip.innerHTML=escapeHtml(t)+' <i class="bi bi-x-lg" role="button" aria-label="حذف"></i>';
+  chip.querySelector('i').onclick=function(e){e.stopPropagation();TAGS.splice(TAGS.indexOf(t),1);chip.remove();syncSug();progress();};
+  document.getElementById('tagBox').insertBefore(chip,document.getElementById('tagInput'));document.getElementById('tagInput').value='';mark('f_cats',false);syncSug();progress();}
 document.getElementById('tagInput').addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===','||e.key==='،'){e.preventDefault();addTag(this.value);}});
+document.getElementById('tagInput').addEventListener('blur',function(){if(this.value.trim())addTag(this.value);});
 
 function setEinv(v){
   EINV=v;
@@ -214,28 +375,39 @@ function setEinv(v){
   document.getElementById('einvNo').classList.toggle('on',v==='لا');
   mark('f_einv',false);
   var ds=document.getElementById('docsSection');
-  if(v==='نعم'){ ds.style.display='block'; }
-  else { ds.style.display='none'; DOCS={}; DOCS_ALL=[]; }
+  if(v==='نعم'){ ds.style.display='flex'; document.getElementById('docsLocked').style.display='none'; }
+  else { ds.style.display='none'; document.getElementById('docsLocked').style.display='flex'; DOCS={}; DOCS_ALL=[]; }
+  progress();
 }
 
 function compressImage(file,cb){var r=new FileReader();r.onload=function(e){var img=new Image();img.onload=function(){var max=1600,w=img.width,h=img.height;if(w>max||h>max){if(w>h){h=Math.round(h*max/w);w=max;}else{w=Math.round(w*max/h);h=max;}}var cv=document.createElement('canvas');cv.width=w;cv.height=h;cv.getContext('2d').drawImage(img,0,0,w,h);cb(cv.toDataURL('image/jpeg',0.7).split(',')[1],'image/jpeg','jpg');};img.src=e.target.result;};r.readAsDataURL(file);}
 function fileB64(file,cb){var r=new FileReader();r.onload=function(e){cb(e.target.result.split(',')[1],file.type,'');};r.readAsDataURL(file);}
-function handleDoc(key,input){var file=input.files&&input.files[0];if(!file)return;if(file.size>8*1024*1024){toast('الملف كبير جداً (الحد ٨ ميجا)','warning');input.value='';return;}var st=document.getElementById('st_'+key);st.innerHTML='<span style="color:#64748b"><i class="bi bi-hourglass-split"></i> جارٍ الرفع...</span>';var go=function(b64,mime,ext){api('uploadDoc',{filename:file.name||('doc.'+ext),mimeType:mime,base64:b64,docType:key,vendor:document.getElementById('fVendor').value.trim()}).then(function(res){if(res&&res.ok){DOCS[key]=res.url;st.innerHTML='<span style="color:#16a34a"><i class="bi bi-check-circle-fill"></i> تم الرفع</span> <a href="'+res.url+'" target="_blank" style="font-size:12px">عرض</a>';document.getElementById('btn_'+key).textContent='تغيير';}else st.innerHTML='<span style="color:#dc2626">فشل الرفع — حاول تاني</span>';}).catch(function(){st.innerHTML='<span style="color:#dc2626">فشل الرفع — حاول تاني</span>';});};if(file.type.indexOf('image/')===0)compressImage(file,go);else fileB64(file,go);}
+function handleDoc(key,input){
+  var file=input.files&&input.files[0];if(!file)return;
+  if(file.size>8*1024*1024){toast('الملف كبير جداً (الحد ٨ ميجا)','warning');input.value='';return;}
+  var st=document.getElementById('st_'+key), row=document.getElementById('row_'+key);
+  row.classList.remove('ok'); st.innerHTML='<i class="bi bi-hourglass-split"></i> جارٍ الرفع…';
+  var go=function(b64,mime,ext){api('uploadDoc',{filename:file.name||('doc.'+ext),mimeType:mime,base64:b64,docType:key,vendor:document.getElementById('fVendor').value.trim()}).then(function(res){
+    if(res&&res.ok){DOCS[key]=res.url;row.classList.add('ok');st.innerHTML='تم الرفع · <a href="'+escapeHtml(res.url)+'" target="_blank" rel="noopener">عرض</a>';document.getElementById('btn_'+key).textContent='تغيير';}
+    else st.innerHTML='<span style="color:var(--err)">فشل الرفع — حاول تاني</span>';
+  }).catch(function(){st.innerHTML='<span style="color:var(--err)">فشل الرفع — حاول تاني</span>';});};
+  if(file.type.indexOf('image/')===0)compressImage(file,go);else fileB64(file,go);
+}
 function setDocMode(m){
   DOCMODE=m;
   document.getElementById('modeSep').classList.toggle('on',m==='sep');
   document.getElementById('modeAll').classList.toggle('on',m==='all');
-  document.getElementById('docsSeparate').style.display=(m==='sep')?'block':'none';
-  document.getElementById('docsCombined').style.display=(m==='all')?'block':'none';
+  document.getElementById('docsSeparate').style.display=(m==='sep')?'grid':'none';
+  document.getElementById('docsCombined').style.display=(m==='all')?'grid':'none';
 }
 function handleCombined(input){
   var files=input.files; if(!files||!files.length) return;
-  var st=document.getElementById('st_all');
-  st.innerHTML='<span style="color:#64748b"><i class="bi bi-hourglass-split"></i> جارٍ رفع '+files.length+' ملف...</span>';
+  var st=document.getElementById('st_all'), row=document.getElementById('row_all');
+  row.classList.remove('ok'); st.innerHTML='<i class="bi bi-hourglass-split"></i> جارٍ رفع '+files.length+' ملف…';
   DOCS_ALL=[]; var done=0,total=files.length,failed=0;
   function checkDone(){ if(done<total)return;
-    if(DOCS_ALL.length) st.innerHTML='<span style="color:#16a34a"><i class="bi bi-check-circle-fill"></i> تم رفع '+DOCS_ALL.length+' ملف</span>'+(failed?' <span style="color:#dc2626">('+failed+' فشل)</span>':'');
-    else st.innerHTML='<span style="color:#dc2626">فشل رفع الملفات — حاول تاني</span>'; }
+    if(DOCS_ALL.length){ row.classList.add('ok'); st.innerHTML='تم رفع '+DOCS_ALL.length+' ملف'+(failed?' <span style="color:var(--err)">('+failed+' فشل)</span>':''); document.getElementById('btn_all').textContent='تغيير'; }
+    else st.innerHTML='<span style="color:var(--err)">فشل رفع الملفات — حاول تاني</span>'; }
   Array.prototype.forEach.call(files,function(file){
     if(file.size>8*1024*1024){ failed++; done++; checkDone(); return; }
     var go=function(b64,mime,ext){
@@ -247,28 +419,79 @@ function handleCombined(input){
   });
 }
 
-function getLoc(){var st=document.getElementById('locStatus');if(!navigator.geolocation){st.innerHTML='<span style="color:#dc2626">المتصفح لا يدعم تحديد الموقع</span>';document.getElementById('locManual').style.display='block';return;}st.innerHTML='<span style="color:#64748b"><i class="bi bi-hourglass-split"></i> جارٍ تحديد موقعك...</span>';navigator.geolocation.getCurrentPosition(function(pos){LAT=pos.coords.latitude.toFixed(6);LNG=pos.coords.longitude.toFixed(6);mark('f_loc',false);document.getElementById('locBtn').classList.add('done');document.getElementById('locLabel').textContent='تم تحديد الموقع ✓ (اضغط لإعادة التحديد)';st.innerHTML='<span style="color:#16a34a"><i class="bi bi-check-circle-fill"></i> '+LAT+', '+LNG+'</span>';showMap(LAT,LNG);},function(err){var msg=(err.code===3)?'انتهت المهلة':'تعذّر تحديد الموقع';if(err.code===1){msg='تم رفض إذن الموقع';showLocHelp();}st.innerHTML='<span style="color:#dc2626"><i class="bi bi-x-circle-fill"></i> '+msg+' — استخدم الرابط بالأسفل</span>';document.getElementById('locManual').style.display='block';},{enableHighAccuracy:true,timeout:12000,maximumAge:0});}
-function showMap(la,ln){var map=document.getElementById('locMap');map.style.display='block';map.innerHTML='<iframe width="100%" height="185" style="border:0" loading="lazy" src="https://maps.google.com/maps?q='+la+','+ln+'&z=16&output=embed"></iframe>';}
+function showManual(){document.getElementById('locManual').style.display='flex';document.getElementById('manualToggle').style.display='none';setTimeout(function(){document.getElementById('fMapLink').focus();},50);}
+function locDone(txt){
+  var b=document.getElementById('locBtn'); b.classList.add('done');
+  b.querySelector('.li i').className='bi bi-check-lg';
+  document.getElementById('locLabel').textContent='تم تحديد الموقع';
+  document.getElementById('locSub').textContent=txt||'اضغط لإعادة التحديد';
+  mark('f_loc',false); progress();
+}
+function getLoc(){
+  var st=document.getElementById('locStatus');
+  if(!navigator.geolocation){st.innerHTML='<span style="color:var(--err)">المتصفح لا يدعم تحديد الموقع</span>';showManual();return;}
+  st.innerHTML='<span style="color:var(--mute)"><i class="bi bi-hourglass-split"></i> جارٍ تحديد موقعك…</span>';
+  navigator.geolocation.getCurrentPosition(function(pos){
+    LAT=pos.coords.latitude.toFixed(6);LNG=pos.coords.longitude.toFixed(6);
+    st.innerHTML=''; locDone(LAT+' , '+LNG+' — اضغط لإعادة التحديد'); showMap(LAT,LNG);
+  },function(err){
+    var msg=(err.code===3)?'انتهت المهلة':'تعذّر تحديد الموقع';
+    if(err.code===1){msg='تم رفض إذن الموقع';showLocHelp();}
+    st.innerHTML='<span style="color:var(--err)"><i class="bi bi-x-circle-fill"></i> '+msg+' — استخدم الرابط بالأسفل</span>';showManual();
+  },{enableHighAccuracy:true,timeout:12000,maximumAge:0});
+}
+function showMap(la,ln){var map=document.getElementById('locMap');map.style.display='block';map.innerHTML='<iframe loading="lazy" title="الموقع" src="https://maps.google.com/maps?q='+la+','+ln+'&z=16&output=embed"></iframe>';}
 function extractLatLng(url){var pats=[/@(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/,/[?&]q=(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/,/[?&]ll=(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/,/!3d(-?\d+(?:\.\d+)?)!4d(-?\d+(?:\.\d+)?)/,/(-?\d{1,3}\.\d{3,}),\s*(-?\d{1,3}\.\d{3,})/];for(var i=0;i<pats.length;i++){var m=url.match(pats[i]);if(m){var la=parseFloat(m[1]),ln=parseFloat(m[2]);if(la>=-90&&la<=90&&ln>=-180&&ln<=180)return{lat:la,lng:ln};}}return null;}
-function applyCoords(c,st){LAT=String(c.lat);LNG=String(c.lng);mark('f_loc',false);st.innerHTML='<span style="color:#16a34a"><i class="bi bi-check-circle-fill"></i> تم تحديد الموقع: '+LAT+', '+LNG+'</span>';showMap(LAT,LNG);}
-function saveMapLink(){var raw=document.getElementById('fMapLink').value.trim();var st=document.getElementById('mapLinkStatus');if(!raw){st.innerHTML='<span style="color:#dc2626">الصق الرابط أولاً</span>';return;}MAPLINK=raw;var c=extractLatLng(raw);if(c){applyCoords(c,st);return;}if(/goo\.gl|maps\.app/i.test(raw)){st.innerHTML='<span style="color:#64748b">جارٍ تحليل الرابط...</span>';api('resolveLink',{url:raw}).then(function(res){var full=res&&res.url,cc=full?extractLatLng(full):null;if(cc)applyCoords(cc,st);else{mark('f_loc',false);st.innerHTML='<span style="color:#16a34a"><i class="bi bi-check-circle-fill"></i> تم حفظ الرابط</span>';}}).catch(function(){mark('f_loc',false);st.innerHTML='<span style="color:#16a34a">تم حفظ الرابط</span>';});return;}mark('f_loc',false);st.innerHTML='<span style="color:#16a34a"><i class="bi bi-check-circle-fill"></i> تم حفظ الرابط</span>';}
-function showLocHelp(){var old=document.getElementById('_locHelp_');if(old)old.remove();var ua=navigator.userAgent||'',isIOS=/iPhone|iPad|iPod/i.test(ua),isA=/Android/i.test(ua),osHead,items;if(isIOS){osHead='<i class="bi bi-apple"></i> آيفون (Safari)';items='<li>الإعدادات ← <b>Safari</b> ← <b>الموقع</b> ← <b>السماح</b></li><li>تأكد إن <b>خدمات الموقع</b> مفعّلة</li><li>ارجع واضغط <b>"مشاركة موقعي"</b></li>';}else if(isA){osHead='<i class="bi bi-android2"></i> أندرويد (Chrome)';items='<li>اضغط <b>🔒 القفل</b> جنب الرابط فوق</li><li><b>الأذونات</b> ← فعّل <b>الموقع</b></li><li>ارجع واضغط <b>"مشاركة موقعي"</b></li>';}else{osHead='<i class="bi bi-globe"></i> المتصفح';items='<li>اضغط <b>🔒 القفل</b> جنب الرابط</li><li>فعّل <b>الموقع (Allow)</b></li><li>حدّث الصفحة وحاول تاني</li>';}var m=document.createElement('div');m.id='_locHelp_';m.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:10001;display:flex;align-items:center;justify-content:center;padding:16px';m.innerHTML='<div style="background:#fff;border-radius:18px;width:100%;max-width:430px;overflow:hidden;font-family:Cairo,sans-serif"><div style="background:linear-gradient(135deg,var(--brand),var(--brand-dark));color:#fff;padding:18px 20px;font-weight:800"><i class="bi bi-geo-alt-fill me-1"></i>تفعيل إذن الموقع</div><div style="padding:20px"><p style="font-size:13.5px;color:#374151;margin:0 0 12px">لو ظهرلك سؤال الإذن اضغط <b>السماح</b>، أو استخدم رابط الموقع بالأسفل. للتفعيل اليدوي:</p><div style="font-size:13px;font-weight:800;color:var(--brand);margin-bottom:8px">'+osHead+'</div><ol style="margin:0;padding-right:20px;font-size:13.5px;line-height:2.1;color:#374151">'+items+'</ol></div><div style="padding:0 20px 20px"><button onclick="document.getElementById(\'_locHelp_\').remove()" style="width:100%;background:var(--brand);border:none;color:#fff;border-radius:12px;padding:12px;font-weight:800;font-family:inherit">تمام</button></div></div>';document.body.appendChild(m);m.onclick=function(e){if(e.target===m)m.remove();};}
+function applyCoords(c,st){LAT=String(c.lat);LNG=String(c.lng);st.innerHTML='<span style="color:var(--ok)"><i class="bi bi-check-circle-fill"></i> تم تحديد الموقع من الرابط</span>';locDone(LAT+' , '+LNG);showMap(LAT,LNG);}
+function linkSaved(st){st.innerHTML='<span style="color:var(--ok)"><i class="bi bi-check-circle-fill"></i> تم حفظ الرابط</span>';locDone('من رابط Google Maps');}
+function saveMapLink(){var raw=document.getElementById('fMapLink').value.trim();var st=document.getElementById('mapLinkStatus');if(!raw){st.innerHTML='<span style="color:var(--err)">الصق الرابط أولاً</span>';return;}MAPLINK=raw;var c=extractLatLng(raw);if(c){applyCoords(c,st);return;}if(/goo\.gl|maps\.app/i.test(raw)){st.innerHTML='<span style="color:var(--mute)">جارٍ تحليل الرابط…</span>';api('resolveLink',{url:raw}).then(function(res){var full=res&&res.url,cc=full?extractLatLng(full):null;if(cc)applyCoords(cc,st);else linkSaved(st);}).catch(function(){linkSaved(st);});return;}linkSaved(st);}
+function showLocHelp(){var old=document.getElementById('_locHelp_');if(old)old.remove();var ua=navigator.userAgent||'',isIOS=/iPhone|iPad|iPod/i.test(ua),isA=/Android/i.test(ua),osHead,items;if(isIOS){osHead='<i class="bi bi-apple"></i> آيفون (Safari)';items='<li>الإعدادات ← <b>Safari</b> ← <b>الموقع</b> ← <b>السماح</b></li><li>تأكد إن <b>خدمات الموقع</b> مفعّلة</li><li>ارجع واضغط <b>«مشاركة موقعي»</b></li>';}else if(isA){osHead='<i class="bi bi-android2"></i> أندرويد (Chrome)';items='<li>اضغط <b>القفل</b> جنب الرابط فوق</li><li><b>الأذونات</b> ← فعّل <b>الموقع</b></li><li>ارجع واضغط <b>«مشاركة موقعي»</b></li>';}else{osHead='<i class="bi bi-globe"></i> المتصفح';items='<li>اضغط <b>القفل</b> جنب الرابط</li><li>فعّل <b>الموقع (Allow)</b></li><li>حدّث الصفحة وحاول تاني</li>';}
+  var m=document.createElement('div');m.id='_locHelp_';m.style.cssText='position:fixed;inset:0;background:rgba(8,12,22,.6);z-index:10001;display:flex;align-items:center;justify-content:center;padding:16px';
+  m.innerHTML='<div style="background:var(--card);color:var(--ink);border-radius:20px;width:100%;max-width:430px;overflow:hidden;box-shadow:0 30px 60px -20px rgba(0,0,0,.5)"><div style="background:var(--navy2);color:#fff;padding:18px 20px;font-weight:800;border-bottom:3px solid var(--red)"><i class="bi bi-geo-alt-fill"></i> تفعيل إذن الموقع</div><div style="padding:20px"><p style="font-size:14px;color:var(--ink2);margin:0 0 12px;line-height:1.8">لو ظهرلك سؤال الإذن اضغط <b>السماح</b>، أو استخدم رابط الموقع. للتفعيل اليدوي:</p><div style="font-size:13.5px;font-weight:800;color:var(--red);margin-bottom:8px">'+osHead+'</div><ol style="margin:0;padding-right:20px;font-size:14px;line-height:2.1;color:var(--ink2)">'+items+'</ol></div><div style="padding:0 20px 20px"><button onclick="document.getElementById(\'_locHelp_\').remove()" class="submit-btn" style="width:100%;justify-content:center">تمام</button></div></div>';
+  document.body.appendChild(m);m.onclick=function(e){if(e.target===m)m.remove();};}
+
+/* ── تقدّم الخطوات ── */
+function stepState(){
+  var digits=document.getElementById('fMobile').value.replace(/\D/g,'');
+  var s1=!!(document.getElementById('fVendor').value.trim()&&document.getElementById('fContact').value.trim()&&digits.length>=8);
+  var s2=!!(TAGS.length&&document.getElementById('fNotes').value.trim()&&EINV);
+  var s3=!!EINV;                                   /* المستندات اختيارية */
+  var s4=!!((LAT&&LNG)||MAPLINK);
+  return [s1,s2,s3&&s2,s4];
+}
+function progress(){
+  var st=stepState(), n=st.filter(Boolean).length, cur=st.indexOf(false);
+  document.querySelectorAll('#stepsNav li').forEach(function(li,i){ li.classList.toggle('done',st[i]); li.classList.toggle('cur',i===cur);
+    li.querySelector('.dot').innerHTML=st[i]?'<i class="bi bi-check-lg"></i>':(i+1); });
+  document.getElementById('progBar').style.width=(n/4*100)+'%';
+  var names=['بيانات الشركة','النشاط والأصناف','المستندات','موقع الشركة'];
+  document.getElementById('barT').textContent= n===4 ? 'كل البيانات جاهزة للإرسال' : 'التالي: '+names[cur];
+  document.getElementById('barS').textContent= n+' من 4 خطوات مكتملة';
+}
+function goSec(n){ document.getElementById('sec'+n).scrollIntoView({behavior:'smooth',block:'start'}); }
 
 function submitForm(){
   var vendor=document.getElementById('fVendor').value.trim(),contact=document.getElementById('fContact').value.trim(),mobileR=document.getElementById('fMobile').value.trim(),email=document.getElementById('fEmail').value.trim(),notes=document.getElementById('fNotes').value.trim(),digits=mobileR.replace(/\D/g,'');
+  var pending=document.getElementById('tagInput').value.trim(); if(pending) addTag(pending);
   var firstBad=null;function fail(id){mark(id,true);if(!firstBad)firstBad=id;}
   if(!vendor)fail('f_vendor');if(!contact)fail('f_contact');if(digits.length<8)fail('f_mobile');
   if(email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))fail('f_email');
   if(!TAGS.length)fail('f_cats');if(!notes)fail('f_notes');if(!EINV)fail('f_einv');
   if((!LAT||!LNG)&&!MAPLINK)fail('f_loc');
   if(firstBad){toast('من فضلك أكمل كل الحقول المطلوبة','warning');document.getElementById(firstBad).scrollIntoView({behavior:'smooth',block:'center'});return;}
-  var btn=document.getElementById('submitBtn');btn.disabled=true;btn.innerHTML='<i class="bi bi-hourglass-split me-1"></i>جارٍ الإرسال...';
+  var btn=document.getElementById('submitBtn');btn.disabled=true;btn.innerHTML='<i class="bi bi-hourglass-split"></i>جارٍ الإرسال…';
   api('submit',{vendor:vendor,contact:contact,mobile:mobileR,email:email,categories:TAGS.join('، '),notes:notes,einvoice:EINV,lat:LAT,lng:LNG,mapLink:MAPLINK,docCommercial:DOCS.commercial||'',docTax:DOCS.tax||'',docAdv:DOCS.adv||'',docVat:DOCS.vat||'',docAll:DOCS_ALL.join(' | '),website:document.getElementById('website').value})
-  .then(function(res){if(res&&res.ok){document.getElementById('formBox').style.display='none';document.getElementById('thanksBox').style.display='block';document.getElementById('refNo').textContent=res.ref||'—';renderContacts();window.scrollTo({top:0,behavior:'smooth'});}else{btn.disabled=false;btn.innerHTML='<i class="bi bi-send-fill me-1"></i>إرسال البيانات';toast((res&&res.msg)||'حدث خطأ','error');}})
-  .catch(function(){btn.disabled=false;btn.innerHTML='<i class="bi bi-send-fill me-1"></i>إرسال البيانات';toast('خطأ في الاتصال','error');});
+  .then(function(res){if(res&&res.ok){
+      document.getElementById('formBox').style.display='none';document.getElementById('stepsNav').style.display='none';document.getElementById('submitBar').style.display='none';
+      document.getElementById('heroTitle').textContent='أهلًا بيك في شبكة موردينا';document.getElementById('heroLead').textContent=vendor;document.getElementById('perks').style.display='none';
+      document.getElementById('thanksBox').style.display='block';document.getElementById('refNo').textContent=res.ref||'—';renderContacts();window.scrollTo({top:0,behavior:'smooth'});
+    }else{btn.disabled=false;btn.innerHTML='<i class="bi bi-send-fill"></i>إرسال البيانات';toast((res&&res.msg)||'حدث خطأ','error');}})
+  .catch(function(){btn.disabled=false;btn.innerHTML='<i class="bi bi-send-fill"></i>إرسال البيانات';toast('خطأ في الاتصال','error');});
 }
-function waLink(p){var d=String(p).replace(/\D/g,'');if(d.indexOf('0')===0)d='2'+d;return 'https://wa.me/'+d;}
-function renderContacts(){if(!CONTACTS.length){document.getElementById('contactsBox').style.display='none';return;}var box=document.getElementById('contactsList');box.innerHTML='';CONTACTS.forEach(function(c){var wa=c.phone?waLink(c.phone):'';var row=document.createElement('div');row.className='contact-row';row.innerHTML='<div class="c-ico"><i class="bi bi-person-fill"></i></div><div class="c-info"><div class="c-name">'+escapeHtml(c.name)+'</div>'+(c.phone?'<div class="c-phone">'+escapeHtml(c.phone)+'</div>':'')+'</div>'+(c.phone?'<div class="c-actions"><a href="tel:'+escapeHtml(c.phone)+'" class="c-btn"><i class="bi bi-telephone-fill"></i></a>'+(wa?'<a href="'+wa+'" target="_blank" class="c-btn wa"><i class="bi bi-whatsapp"></i></a>':'')+'</div>':'');box.appendChild(row);});document.getElementById('contactsBox').style.display='block';}
+function copyRef(){var t=document.getElementById('refNo').textContent;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){toast('تم نسخ الرقم المرجعي','success');}).catch(function(){});}
+function waLink(p){var d=String(p).replace(/\D/g,'');if(d.indexOf('00')===0)d=d.slice(2);if(d.length===11&&d[0]==='0')d='20'+d.slice(1);return 'https://wa.me/'+d;}
+function renderContacts(){if(!CONTACTS.length){document.getElementById('contactsBox').style.display='none';return;}var box=document.getElementById('contactsList');box.innerHTML='';CONTACTS.forEach(function(c){var wa=c.phone?waLink(c.phone):'';var row=document.createElement('div');row.className='contact-row';row.innerHTML='<div class="c-ico"><i class="bi bi-person-fill"></i></div><div class="c-info"><div class="c-name">'+escapeHtml(c.name)+'</div>'+(c.phone?'<div class="c-phone">'+escapeHtml(c.phone)+'</div>':'')+'</div>'+(c.phone?'<div class="c-actions"><a href="tel:'+escapeHtml(c.phone)+'" class="c-btn" aria-label="اتصال"><i class="bi bi-telephone-fill"></i></a>'+(wa?'<a href="'+wa+'" target="_blank" rel="noopener" class="c-btn wa" aria-label="واتساب"><i class="bi bi-whatsapp"></i></a>':'')+'</div>':'');box.appendChild(row);});document.getElementById('contactsBox').style.display='block';}
+progress();
 </script>
 </body>
 </html>
